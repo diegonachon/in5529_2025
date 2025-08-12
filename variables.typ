@@ -11,12 +11,13 @@
 
 
 //Cap
-#let cap = "cap1p2"
+#let cap = "cap2p1"
 
 #let chapter_titles = (
   cap0:   "Chapter 0 – Introduction",
   cap1p1: "Chapter 1 Part 1 – Initial Concepts and Knowledge Discovery in Databases",
   cap1p2: "Chapter 1 Part 2 - Other methodologies, Web Mining and Overview of Foundational Models",
+  cap2p1: "Chapter 2 Part 1 - Web Content Mining: Text Mining on the Web"
 )
 
 //Subtitulos
