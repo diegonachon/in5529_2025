@@ -391,176 +391,115 @@ $ "wp"_j^i = frac(n_i, Q) $
 
 $ "IDF" = log(frac(Q, n_i)) $
 
-- A variation of the last expression is know as TF - IDF:
+- A variation of the last expression is know as $"TF" * "IDF"$:
 
-$ "wp"_j^i = "TF-IDF" = "tf"_(i,d) * log(frac(Q, n_i)) $
-
-
+$ "wp"_j^i = "TF" * "IDF" = "tf"_(i,d) * log(frac(Q, n_i)) $
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-== Cross Industry Standard Process For Data Mining
+== Initial Concepts
 #place(top + left, dx: -2.5em)[
-  #subbar([CRISP-DM steps])
+  #subbar([Building a Vector Space Model])
 ]
+#h(1em)
 
-#v(20pt)
+4. Calculating the word page vector
 
-
-
-== Step 1: Business understanding
-
-Placeholder
-
-== Step 2: Data understanding
-
-Placeholder
-
-== Step 3: Data preparation
-
-Placeholder
-
-== Step 4: Modeling
-
-Placeholder
-
-== Step 5: Evaluation
-
-Placeholder
-
-== Step 6: Deployment
-
-Placeholder
-
-== CRISP-ML (Q)
-
-Placeholder
-
-= Web Mining
-
-== Web Data
-#place(top + left, dx: -2.5em)[
-  #subbar([The problem])
-]
-
-#dblock(title: [The problem])[
-  Garbage-in, Garbage-out.
-]
-
-Web Data is highly variable in *type* and *format:*
-
-- Text, tags and multimedia in different structured data formats, like *HTML*, *JSON*, *XML* and *CSV*.
-- *Web Logs* have an standard, but *sessions* are not necessarily explicit them.
-- Web sites *change over time*, so does data.
-
-== Web Data
-#place(top + left, dx: -2.5em)[
-  #subbar([In practice])
-]
-
-We require to treat the Data to achieve better results (as we will see in the following chapters of the course):
-
-- Transform pages into *feature vectors* or *embeddings* (Chapter 2).
-- Obtain the *Web site graph* (Chapter 3). 
-- Clean and reconstruct *individual sessions* from users (Chapter 4).
-
-This process of Web Data *cleaning and transforming* should store it's outputs for further Data Mining steps.
-
-== Mining the Web: Web Mining
-
-#dblock(title: [Web Mining])[
-  Web Mining techniques are the application of Data Mining theory in order to discover patters from Web Data.
-]
-
-There are three main categories of Web Mining: 
-
-- Web Content Mining
-- Web Structure Mining
-- Web Usage Mining
-
-== Web Mining Taxonomy
-
-\#figure(
-  image("images/wm.png"),
-  caption: [Web Mining Taxonomy]
+#figure(
+  image("images/tfidfexample.png", width: 50%)
 )
 
-== Web Content Mining
 
-#dblock(title: [Web Content Mining])[
-  Definition
-]
 
-- The goal: find useful information from the web content *(similar to _Information Retrieval_).*
-
-- Web content is not only free text, other objects like pictures, sound, movies, metadata and hyperlinks belong also to the content.
-
-== Web Content Mining
+== Initial Concepts
 #place(top + left, dx: -2.5em)[
-  #subbar([The two views])
+  #subbar([Building a Vector Space Model])
 ]
+#h(1em)
 
-There are two main areas in Web Content Mining (WCM).
+4. Calculating the word page vector
 
-- Mining of document contents: WCM 
-- Improving content search tools: 
+- Based on the $"TF" * "IDF"$ weights:
 
-== Web Content Mining
+$ "wp"_(i,j) = "tf"_(i,d) * log(frac(Q, n_i)) $
+
+- A more parameterized approach:
+
+$ "wp"_(i,j) = "tf"_(i,d) * (1 + "sw"_i) * log(frac(Q, n_i)) $
+
+- Where $"sw"_i$ is an additional weight for the _i_-th word.
+
+- In this way, the vector $"sw"_i$ allows to include *semantic information* about special words in the page like tagged word in HTML (bold, italic, titles, ...)
+
+
+
+== Initial Concepts
 #place(top + left, dx: -2.5em)[
-  #subbar([Examples])
+  #subbar([Building a Vector Space Model])
 ]
+#h(1em)
+
+4. Calculating the word page vector
+
+- Another suggestion is to include the _Normalized Term Frequency_ on $"TF" * "IDF"$:
+
+$ "wp"_(i,j) = [a + (1-a)frac("tf"_(i,j), "tf"_(max(d)))] * log(frac(Q, n_i)) $
+
+- This model is very good in practice:
+  - $"TF" * "IDF"$ works well with general collections.
+  - Simple and fast to compute.
 
 
 
-== Web Structure Mining
-
-#dblock(title: [Web Structure Mining])[
-  Web Structure Mining deals with the mining of *Web hyperlink structure*.
+== Initial Concepts
+#place(top + left, dx: -2.5em)[
+  #subbar([Building a Vector Space Model])
 ]
+#h(1em)
 
-- A Web site is represented by a graph of its links, within the site or between sites.
+5. Data mining algorith application
 
-== Web Usage Mining
+- Now, we have vectors that represent pages and word importance over them:
 
-= Overview of Foundational Models
+$ "wp"^i = ("wp"^i_1, ..., "wp"^i_R) in "WP" $
+
+- *We have to process this data*.
+
+- Data mining techniques applies.
+
+- But we need to *define a way to compare them*.
+
+
+
+== Initial Concepts
+#place(top + left, dx: -2.5em)[
+  #subbar([Building a Vector Space Model])
+]
+#h(1em)
+
+5. Data mining algorith application
+
+#grid(
+  columns: (1fr, 1fr),
+  rows: (auto),
+  text()[
+
+    - Euclidean distance
+
+    #figure(
+      image("images/euclidean_distance.png", width: 70%)
+      )
+    ],
+  
+  text()[
+
+    - Cosine Similarity
+
+    #figure(
+      image("images/cosine_similarity.png", width: 70%)
+      )
+    ],
+)
+
+
 
