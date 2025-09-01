@@ -10,17 +10,23 @@
 #let title  = "Artificial Intelligence Applied to the Web"
 
 
-//Cap
-#let cap = "cap2p1"
+// Cap
+#let cap = "cap3p2"
 
 #let chapter_titles = (
   cap0:   "Chapter 0 – Introduction",
   cap1p1: "Chapter 1 Part 1 – Initial Concepts and Knowledge Discovery in Databases",
-  cap1p2: "Chapter 1 Part 2 - Other methodologies, Web Mining and Overview of Foundational Models",
-  cap2p1: "Chapter 2 Part 1 - Web Content Mining: Text Mining on the Web"
+  cap1p2: "Chapter 1 Part 2 - CRISP-DM and Other Methodologies, Web Mining and Overview of Foundation Models",
+  cap2p1: "Chapter 2 Part 1 - Web Content Mining: Text Mining on the Web",
+  cap2p2: "Chapter 2 Part 2 - VSM Feature Engineering and Statistical Language Models",
+  cap2p3: "Chapter 2 Part 3 - Vector Semantics and Neural Language Models",
+  cap2p4: "Chapter 2 Part 4 - Neural Language Models and LLMs", 
+  cap2p5: "Chapter 2 Part 5 - The Semantic Web",
+  
+  cap3p2: "Chapter 3 Part 2 - Web Page Rank Algorithms"
 )
 
-//Subtitulos
+// Subtitulos
 #let subtitle = chapter_titles.at(cap, default: "Unknown chapter")
 
 

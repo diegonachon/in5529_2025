@@ -355,7 +355,7 @@ $ "tf"_(i,d) = frac(f_(i,d), sum_k f_(k,d)) $
 
 - We could consider a *Normalized Term Frequency* as:
 
-$ "ntf"_(i,j) = a + (1-a)frac("tf"_(i,j), "tf"_(max(d))) $
+$ "ntf"_(i,d) = a + (1-a)frac("tf"_(i,d), max_{t' in d}"tf"_(t',d)) $
 
 - Where _a_ is a smoothing term between 0 and 1, generally set to 0.4.
 
@@ -370,6 +370,8 @@ $ "ntf"_(i,j) = a + (1-a)frac("tf"_(i,j), "tf"_(max(d))) $
 4. Calculating the word page vector
 
 - Now, how we could consider the frequency across documents (Web pages)?
+
+$ "DF"_i = n_i $
 
 - The model associates a *weight to each word* in the page, based on its frequency in the whole Web site.
 

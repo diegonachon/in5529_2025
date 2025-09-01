@@ -1,12 +1,12 @@
 #import "@preview/touying:0.6.1": *
 #import themes.stargazer: *
 #import "@preview/numbly:0.1.0": numbly
-#import "/in5529_2025/variables.typ"
+#import "/variables.typ"
 
 #set text(
   font : "Source Serif Pro",
 )
-
+#set par(justify: true)
 
 #show: stargazer-theme.with(
   aspect-ratio: "16-9",
