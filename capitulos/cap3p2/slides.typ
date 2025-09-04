@@ -654,9 +654,18 @@ In the previous example, it will be:
 - $H$: SALSA’s hub matrix, consists of the nonzero rows and columns of $L_r L_c^T$
 - $A$: SALSA’s authority matrix, consists of the nonzero rows and columns of $L_c^T L_r$
 
-#figure(
-    image("images/salsa2.PNG", width: 90%),
+#grid(
+  columns: (1fr, 1fr),
+  gutter: 1em,
+  figure(
+    image("images/salsa2_1.png", width: 90%),
+  ),
+  figure(
+    image("images/salsa2_2.png", width: 90%),
   )
+
+  
+)
 
 
 
@@ -664,9 +673,18 @@ In the previous example, it will be:
 #place(top + left, dx: -2.5em)[
   #subbar([How are A and H computed in SALSA?])
 ]
-#figure(
-    image("images/salsa3.PNG", width: 90%),
+#grid(
+  columns: (1fr, 1fr),
+  gutter: 1em,
+  figure(
+    image("images/H.png", width: 90%),
+  ),
+  figure(
+    image("images/A.png", width: 70%),
   )
+
+  
+)
 
 
 
