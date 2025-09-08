@@ -200,7 +200,6 @@ Users today expect search technology to be:
 
 
 
-
 == Understanding User Intent
 #place(top + left, dx: -2.5em)[
   #subbar([Search Engine vs Recommendation Engines])
@@ -215,6 +214,45 @@ Users today expect search technology to be:
   - Typically does not accept direct user input.
   - Delivers content based on what the engine learns about users, calculating best matches for their interest and behaviors.
   - Commonly uses three approaches: content-based, behavior-based, and multimodal recommenders.
+
+
+
+== Understanding User Intent
+#place(top + left, dx: -2.5em)[
+  #subbar([Search Engine])
+]
+#h(1em)
+
+
+#figure(
+    image("images/search_engine.png", width: 80%),
+  )
+
+
+
+== Understanding User Intent
+#place(top + left, dx: -2.5em)[
+  #subbar([Recommendation Engine])
+]
+#h(1em)
+
+
+#figure(
+    image("images/recommendation_engine.png", width: 80%),
+  )
+
+
+
+== Understanding User Intent
+#place(top + left, dx: -2.5em)[
+  #subbar([Recommendation Engine])
+]
+#h(1em)
+
+
+#figure(
+    image("images/recommendation_engine2.png", width: 80%),
+  )
 
 
 
@@ -243,7 +281,9 @@ Users today expect search technology to be:
 ]
 #h(1em)
 
-IMAGEN 
+#figure(
+    image("images/personalization_spectrum.png", width: 80%),
+  )
 
 
 
@@ -262,6 +302,18 @@ IMAGEN
   - Disambiguating the many nuanced meanings of domain-specific terminology.
 
 - The ultimate goal is to *search on "things", not "strings".*
+
+
+
+== Understanding User Intent
+#place(top + left, dx: -2.5em)[
+  #subbar([The Third Dimension: Domain Understanding])
+]
+#h(1em)
+
+#figure(
+    image("images/things_not_strings.png", width: 70%),
+  )
 
 
 
@@ -287,6 +339,18 @@ IMAGEN
 ]
 #h(1em)
 
+#figure(
+    image("images/dimensions_user_intent.png", width: 80%),
+  )
+
+
+
+== Understanding User Intent
+#place(top + left, dx: -2.5em)[
+  #subbar([Achieving True User Intent])
+]
+#h(1em)
+
 - The intersection of these pillars create more advanced search capabilities:
 
   - Content + User Understanding: *Personalized Search*.
@@ -298,6 +362,7 @@ IMAGEN
   - An expert understanding of the domain.
   - An expert understanding of the users and their preferences.
   - And expert ability to match and rank arbitrary queries against any content.
+
 
 
 == How AI-Powered Search Works

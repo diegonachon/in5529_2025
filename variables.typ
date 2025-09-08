@@ -11,7 +11,7 @@
 
 
 // Cap
-#let cap = "cap3p1"
+#let cap = "cap3p3"
 
 #let chapter_titles = (
   cap0:   "Chapter 0 – Introduction",
@@ -23,7 +23,8 @@
   cap2p4: "Chapter 2 Part 4 - Neural Language Models and LLMs", 
   cap2p5: "Chapter 2 Part 5 - The Semantic Web",
   cap3p1: "Chapter 3 Part 1 - Fundamentals of Web Structure Mining and Graph Theory",
-  cap3p2: "Chapter 3 Part 2 - Web Page Rank Algorithms"
+  cap3p2: "Chapter 3 Part 2 - Web Page Rank Algorithms",
+  cap3p3: "Chapter 3 Part 3 - Modern Web Search Approaches",
 )
 
 // Subtitulos
