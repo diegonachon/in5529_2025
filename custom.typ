@@ -40,3 +40,13 @@
     ),
   )
 }
+
+#let bblock(it) = {
+  block(
+    fill: luma(240),
+    width: 100%,
+    radius: (bottom: 6pt),
+    inset: (top: 0.4em, bottom: 0.5em, left: 0.5em, right: 0.5em),
+    it,
+  )
+}

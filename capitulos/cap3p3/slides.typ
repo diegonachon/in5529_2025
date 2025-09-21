@@ -385,6 +385,70 @@ Users today expect search technology to be:
 
 == How AI-Powered Search Works
 #place(top + left, dx: -2.5em)[
+  #subbar([The Search Intelligence Progression])
+]
+#h(1em)
+
+#figure(
+    image("images/search_intelligence_progression.png", width: 60%),
+  )
+
+
+
+== How AI-Powered Search Works
+#place(top + left, dx: -2.5em)[
+  #subbar([Reflected Intelligence through feedback loops])
+]
+#h(1em)
+
+- Feedback loop are critical to building an AI-powered search solution.
+
+- Without feedback, it's like an education consisting only of reading textbooks with no teachers, exams, or classmates, which would lead to a flawed understanding.
+
+- Traditional search engines often operates this way, acting on their initial configurations the same way every time for repeated user queries.
+
+- However, search engines are the perfect type of system for interactive learning when feedback loops are introduced.
+
+
+
+== How AI-Powered Search Works
+#place(top + left, dx: -2.5em)[
+  #subbar([The Flow of a Search Feedback Loop])
+]
+#h(1em)
+
+- Step 1: A user issues a query. This query executes a search.
+
+- Step 2: The system return results. These can be specific answers, a list of answers, or links to pages.
+
+ - Step 3: The user takes one or more actions.
+  - These actions usually start with clicks on documents.
+  - They can lead to other context-specific actions, such as:
+    - Adding an item to a shopping cart and purchasing it.
+    - Giving an item a thumbs up or thumbs down.
+    - Liking or commenting on the result.
+
+
+
+== How AI-Powered Search Works
+#place(top + left, dx: -2.5em)[
+  #subbar([The Flow of a Search Feedback Loop])
+]
+#h(1em)
+
+#figure(
+    image("images/reflected_intelligence_feedback.png", width: 50%),
+  )
+
+These actions can then be used to generate an improved relevance ranking model for future searches.
+
+
+
+
+
+
+== How AI-Powered Search Works
+#place(top + left, dx: -2.5em)[
   #subbar([The Power of Signals])
 ]
 #h(1em)
@@ -393,10 +457,33 @@ Users today expect search technology to be:
 
 - Signals provide a constant stream of feedback that can be used by machine learning algorithms to power user, content, and domain understanding.
 
+
+
+== How AI-Powered Search Works
+#place(top + left, dx: -2.5em)[
+  #subbar([The Power of Signals])
+]
+#h(1em)
+
 - Key refelected intelligence algorithms powered by signal include:
+
   - *Popularized relevance*: Signals-boosting algorithms use aggregated signals to boost the rankings of the most important documents for popular queries.
+
   - *Personalized relevance*: Collaborative filtering algorithms use signals to generate recommendations and user profiles to personalize search results.
+
   - *Generalized relevance*: Learning to rank algorithms train ranking classifiers based on relevance judgments generated from user signals to create models that can apply to all queries.
+
+
+
+== How AI-Powered Search Works
+#place(top + left, dx: -2.5em)[
+  #subbar([The Power of Signals])
+]
+#h(1em)
+
+#figure(
+    image("images/signal_flow.png", width: 70%),
+  )
 
 
 
@@ -413,7 +500,7 @@ Users today expect search technology to be:
 - *Large Language Models* (LLMs) based on the *Transformer architecture* have revolutionized query and content interpretation.
   - They are deep neural networks trained on massive amounts of text.
   - They can recognize, summarize, predict, and generate new data.
-  - They are used to generate *embeddings*, which are numerical vector repressentations of content's meaning, enabling a sophisticated ability to search on a query's meaning.
+  - They are used to generate *embeddings*, which are numerical vector representations of content's meaning, enabling a sophisticated ability to search on a query's meaning.
 
 
 
@@ -427,10 +514,23 @@ Users today expect search technology to be:
 
 - *Retrieval Augmented Generation (RAG)*: Search engines are used as a knowledge source for LLMs, allowing relevant context to be retrieved and passed to the LLM to ensure it has up-to-date and accurate data from which to answer. This is critical for preventing LLMs from "hallucinating".
 
-- *Generative Search*: In turnt, LLMs are critical components of search engines. They can be used to:
+- *Generative Search*: In turn, LLMs are critical components of search engines. They can be used to:
   - Interpret queries and generate embeddings.
   - Generate summaries of search results.
   - Generate answers to questions directly from search results.
+
+
+
+== How AI-Powered Search Works
+#place(top + left, dx: -2.5em)[
+  #subbar([Generative AI & Retrieval Augmented Generation (RAG)])
+]
+#h(1em)
+
+#figure(
+    image("images/generative_search_transition.png", 
+    width: 90%),
+  )
 
 
 
@@ -442,7 +542,7 @@ Users today expect search technology to be:
 
 - An end-to-end system for continuous learning requires several key building blocks:
 
-  - A *core search engine*.
+  - A *core search engine* (indexing, matching, ranking).
   - *Index-time transformations* to enrich content as it's indexed (e.g., creating embeddings, extracting entities).
   - *Query pipelines* to interpret incoming queries (e.g., correcting misspellings, expanding with synonyms, rewriting the query).
   - A *job processing framework* to run batch jobs on content and signals to derive domain-specific intelligence.
