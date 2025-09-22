@@ -18,6 +18,17 @@
 
 
 
+== A Quick Recap
+#place(top + left, dx: -2.5em)[
+  #subbar([Machine Learning])
+]
+#h(1em)
+
+#figure(
+  image("images/ia_ml.png", width: 40%),
+)
+
+
 == Machine Learning
 #place(top + left, dx: -2.5em)[
   #subbar([Types of learning])
@@ -55,9 +66,9 @@
 #h(1em)
 
 - *Multi-level analysis*: Graph ML algorithms can extract and process features at different levels of granularity:
-  - *Node-level* (e.g., classifying a user's role)
-  - *Edge-level* (e.g., predicting a future friendship)
-  - *Graph-level* (e.g., classifying an entire molecule)
+  - Node-level (e.g., classifying a user's role)
+  - Edge-level (e.g., predicting a future friendship)
+  - Graph-level (e.g., classifying an entire molecule)
 
 
 
@@ -81,7 +92,7 @@
 
 - *The Problem*: How do we feed a graph into a traditional machine learning algorithm that expects a fixed-size vector of numbers?
 - *Classic Approach (Feature Engineering)*: Manually calculate graph metrics (like degree, efficiency, centrality) for each node or graph. This is time-consuming and may not capture all the important information.
-- *The Modern Solution (Representation Learning)*: Instead of manual engineering, we learn a function that *automatically* maps the graph into a low-dimensional vector space. This process is called *network embedding*.
+- *The Modern Solution (Representation Learning)*: Instead of manual engineering, we learn a function that *automatically* maps the graph into a low-dimensional *vector space*. This process is called *network embedding*.
 - *The Goal*: The embedding must preserve the structural properties of the original graph. Nodes that are "similar" in the graph should be close to each other in the new vector space.
 
 
@@ -137,7 +148,7 @@
 #h(1em)
 
 #figure(
-  image("images/enc_dec.png", width: 70%),
+  image("images/enc_dec.png", width: 80%),
 )
 
 
@@ -163,7 +174,7 @@ Based on the ENC-DEC framework, we can group algorithms into four main families:
 
 - *Neighborhood Aggregation Methods*: Also _inductive_. These algorithms, like GNNs, learn a general function that creates embeddings by aggregating information from a node's local neighborhood and its features.
 
-- *Graph Regularization Methods*:These methods use the graph structure to _regularize_ a learning process on a set of features, enforcing that connected nodes should have similar predictions or embeddings.
+- *Graph Regularization Methods*: These methods use the graph structure to _regularize_ a learning process on a set of features, enforcing that connected nodes should have similar predictions or embeddings.
 
 
 
@@ -253,21 +264,6 @@ $ "Loss" = alpha L_("sup")(y, overline(y)) + L_("rec")(G, overline(G)) $
 
 
 
-== GNNs: How Information is Processed
-#place(top + left, dx: -2.5em)[
-  #subbar([Message Passing])
-]
-#h(1em)
-
-- Each node is associated with a set of features or a hidden state ($h_i^t$).
-- At each layer ($t$), nodes accumulate input from their neighbors using a simple neural network layer. The basic formula looks like this:
-  $ h_i^t = sum_(v_j in N(v_i)) sigma(W h_j^(t-1) + b) $
-- This process is applied recursively, with the output of one layer becoming the input for the next.
-- The final result is a rich embedding ($Z$) for each node, which is a function of the initial features ($X$) and the graph's topology ($A$).
-  $ Z = "GNN"(X, A) $
-
-
-
 == Variants of GNNs
 #place(top + left, dx: -2.5em)[
   #subbar([The Two Main Approaches])
@@ -276,8 +272,8 @@ $ "Loss" = alpha L_("sup")(y, overline(y)) + L_("rec")(G, overline(G)) $
 
 - Many variations of the basic GNN have been proposed to improve their representation learning capabilities and to handle specific types of graphs (directed, dynamic, etc.).
 - There are essentially two main types of convolutional operations for graph data:
-  - *Spectral Approaches*: These methods define convolution in the _spectral domain_ (by decomposing the graph into simpler elements, often using the graph Laplacian).
-  - *Spatial (Non-Spectral) Approaches*: These methods formulate convolution by directly _aggregating feature information_ from a node's local neighbors, as described with message passing.
+  - *Spectral Approaches*: These methods define convolution in the _spectral domain_ (by decomposing the graph into simpler elements).
+  - *Spatial (Non-Spectral) Approaches*: These methods formulate convolution by directly _aggregating feature information_ from a node's local neighbors.
 - Other improvements also exist, such as adding new mechanisms to the propagation step, like _attention_, _gate mechanisms_, and _skip connections_.
 
 
