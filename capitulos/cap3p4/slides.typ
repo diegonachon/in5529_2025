@@ -4,157 +4,298 @@
 #import "../../custom.typ": *
 
 
+= Graph Machine Learning
+
+== A Quick Recap
+#place(top + left, dx: -2.5em)[
+  #subbar([Machine Learning])
+]
+#h(1em)
+
+- *Machine learning* is a subset of Artificial Intelligence that aims to provide systems with the ability to _learn_.
+- It performance can be measured using a specific performance metric (also known as a *loss function*).
+- According to T. Mitchell: _"An algorithm is said to learn from experience, E, if its performance at task T, measured by P, improves with experience E"_.
+
+
+
+== Machine Learning
+#place(top + left, dx: -2.5em)[
+  #subbar([Types of learning])
+]
+#h(1em)
+
+- Four main learning types categories:
+  - *Supervised*: The model learns from data where the correct answer is known, using labeled input-output pairs like.
+  - *Unsupervised*: The model learns from unlabeled data, with the goal of discovering hidden structures, patterns, or similarities on its own.
+  - *Semi-supervised*: A hybrid approach where the model is trained on a dataset containing both a small amount of labeled data and a large amount of unlabeled data.
+  - *Reinforcement*: An agent learns to make a sequence of decisions by interacting with an environment, receiving rewards or penalties for its actions.
+
+
+
+== The Benefit of Machine Learning on Graphs
+#place(top + left, dx: -2.5em)[
+  #subbar([Why Use ML on Graphs?])
+]
+#h(1em)
+
+- *Traditional ML has limitations*: Classic algorithms work best with grid-like data (e.g., tables, images) and often fail to capture the complex relationships inherent in graph structures.
+
+- *Graphs model real-world systems*: Many systems, from social networks to biological interactions, are naturally represented as graphs.
+
+- *Automatic pattern discovery*: The key advantage of Graph ML is its ability to *automatically detect and interpret complex, latent patterns* within graph-structured data.
+
+- *Deeper insights*: These are patterns that are often too intricate for traditional models to identify, allowing for more effective modeling of relationships.
+
+
+
+== The Benefit of Machine Learning on Graphs
+#place(top + left, dx: -2.5em)[
+  #subbar([Why Use ML on Graphs?])
+]
+#h(1em)
+
+- *Multi-level analysis*: Graph ML algorithms can extract and process features at different levels of granularity:
+  - *Node-level* (e.g., classifying a user's role)
+  - *Edge-level* (e.g., predicting a future friendship)
+  - *Graph-level* (e.g., classifying an entire molecule)
+
+
+
+== The Benefit of Machine Learning on Graphs
+#place(top + left, dx: -2.5em)[
+  #subbar([Why Use ML on Graphs?])
+]
+#h(1em)
+
+#figure(
+  image("images/graph_levels.PNG", width: 80%),
+)
+
+
+
+== The Generalized Graph Embedding Problem
+#place(top + left, dx: -2.5em)[
+  #subbar([The Challenge with Graph Data])
+]
+#h(1em)
+
+- *The Problem*: How do we feed a graph into a traditional machine learning algorithm that expects a fixed-size vector of numbers?
+- *Classic Approach (Feature Engineering)*: Manually calculate graph metrics (like degree, efficiency, centrality) for each node or graph. This is time-consuming and may not capture all the important information.
+- *The Modern Solution (Representation Learning)*: Instead of manual engineering, we learn a function that *automatically* maps the graph into a low-dimensional vector space. This process is called *network embedding*.
+- *The Goal*: The embedding must preserve the structural properties of the original graph. Nodes that are "similar" in the graph should be close to each other in the new vector space.
+
+
+
+== What an Embedding Looks Like
+#place(top + left, dx: -2.5em)[
+  #subbar([From Structure to Space])
+]
+#h(1em)
+
+- An embedding algorithm transforms the graph's topology into geometric relationships.
+- *Example*: In a barbell graph, there are three distinct structural groups: two dense clusters and one connecting path.
+- After applying an embedding algorithm like `Node2Vec`, these three groups appear as clearly separated clusters of points in the new 2D vector space.
+- This new vector representation can now be used as input for any standard ML model.
+
+
+#dblock(title: [Key Distinction])[
+  - _Transductive_ methods must be retrained to generate embeddings for new, unseen nodes.
+  - _Inductive_ methods learn a general function that can create embeddings for new data without retraining.
+]
+
+
+
+== What an Embedding Looks Like
+#place(top + left, dx: -2.5em)[
+  #subbar([From Structure to Space])
+]
+#h(1em)
+
+#figure(
+  image("images/graph_embedding.PNG", width: 70%),
+)
+
+
+
+== A Taxonomy of Embedding Algorithms
+#place(top + left, dx: -2.5em)[
+  #subbar([A Unifying Framework])
+]
+#h(1em)
+
+- To organize the many different embedding algorithms, we can use a unified *Encoder-Decoder (ENC-DEC)* framework:
+  - *The Encoder (ENC)*: This is a function that takes the input graph (or its nodes/edges) and maps it into the low-dimensional embedding space.
+  - *The Decoder (DEC)*: This function takes the learned embedding and tries to decode structural information about the original graph from it (e.g., predict if two nodes are connected).
+- *The Core Idea*: If an embedding is "good," it must contain enough compressed information for the decoder to successfully reconstruct the graph's key properties.
+
+
+
+== A Taxonomy of Embedding Algorithms
+#place(top + left, dx: -2.5em)[
+  #subbar([A Unifying Framework])
+]
+#h(1em)
+
+#figure(
+  image("images/enc_dec.png", width: 70%),
+)
+
+
+
+== The Four Main Categories
+#place(top + left, dx: -2.5em)[
+  #subbar([Algorithm Families])
+]
+#h(1em)
+
+Based on the ENC-DEC framework, we can group algorithms into four main families:
+
+- *Shallow Embedding Methods*: These are _transductive_. They learn a unique embedding for each node in the input graph and cannot generalize to new nodes without retraining. (e.g., `Node2Vec`).
+- *Graph Autoencoding Methods*: These are _inductive_. They learn a general mapping function that can generate embeddings for new, unseen graph instances.
+
+
+
+== The Four Main Categories
+#place(top + left, dx: -2.5em)[
+  #subbar([Algorithm Families])
+]
+#h(1em)
+
+- *Neighborhood Aggregation Methods*: Also _inductive_. These algorithms, like GNNs, learn a general function that creates embeddings by aggregating information from a node's local neighborhood and its features.
+
+- *Graph Regularization Methods*:These methods use the graph structure to _regularize_ a learning process on a set of features, enforcing that connected nodes should have similar predictions or embeddings.
+
+
+
+== The Generalized Loss Function
+#place(top + left, dx: -2.5em)[
+  #subbar([Training the Models])
+]
+#h(1em)
+
+- These models are trained by optimizing a loss function that often combines two goals:
+
+$ "Loss" = alpha L_("sup")(y, overline(y)) + L_("rec")(G, overline(G)) $
+
+- The *Supervised Loss* ($L_("sup")$):
+  - Used in supervised settings. It measures the difference between the model's prediction ($overline(y)$) and the true label ($y$).
+- The *Reconstruction Loss* ($L_("rec")$):
+  - Used in unsupervised settings. It measures the error between the original graph ($G$) and the graph reconstructed by the decoder ($overline(G)$).
+- For purely unsupervised tasks, the coefficient $alpha$ is set to 0. This framework elegantly unifies both learning paradigms.
+
+
+
 = Neural Networks and Graphs
 
-== Neural Networks and Graphs
+== A Quick Recap
 #place(top + left, dx: -2.5em)[
-  #subbar([Today's Class])
+  #subbar([What is an Artificial Neural Network?])
 ]
 #h(1em)
 
-- *From Traditional AI to Graph AI*: We'll explore the bridge between classic neural networks and the exciting world of graph-structured data.
-- *Core Concepts*: Understanding these foundations is key to building modern Graph Machine Learning models.
-- *Practical Tools*: We'll look at the main frameworks used in both research and industry.
+- Artificial Neural Networks (ANNs) are the core of modern deep learning, and their popularity has exploded in recent years.
+- They are versatile and powerful models that have been adopted across many domains, including graphs.
+- Their success is thanks to recent advances in computing power (especially GPUs) and the availability of large datasets.
 
-== Artificial Neural Networks (ANNs)
+
+
+== A Quick Recap
 #place(top + left, dx: -2.5em)[
-  #subbar([The Building Blocks of Deep Learning])
+  #subbar([The Basic Building Block])
 ]
 #h(1em)
 
-- At its core, an ANN is a model made of simple, interconnected units called _neurons_.
-- These neurons are organized in sequential _layers_: an input layer, one or more hidden layers, and an output layer.
-- Each connection has a learnable *weight* ($W_("ij")^(l)$) and each neuron has a *bias* ($b_i^(l)$).
-- *Activation functions* ($f_a$) like ReLU or sigmoid introduce non-linearity, allowing the network to learn complex patterns.
+- An ANN is built from simple units called _neurons_.
+- A neuron takes multiple inputs ($x_i$), combines them, and produces a single output ($y$).
+- The relationship is defined by a simple mathematical formula:
+  $ y = f_a (b + sum_i W_i x_i) $
+- This formula includes three key learnable components:
+  - *Weights* ($W_i$): Determine the importance of each input.
+  - *Bias* ($b$): An offset, similar to the intercept in a linear equation.
+  - *Activation Function* ($f_a$): Introduces non-linearity.
 
-== Artificial Neural Networks (ANNs)
+
+
+== A Quick Recap
 #place(top + left, dx: -2.5em)[
-  #subbar([The Power of Depth])
+  #subbar([Stacking Neurons into Layers])
 ]
 #h(1em)
 
-- *Universal Approximation Theorem*: A key concept stating that a neural network with just one hidden layer can, in theory, represent any continuous function.
-- *Why Go Deep?* While a "wide" network can approximate any function, "deep" networks (with many layers) are far more efficient at learning.
-- Stacking many layers allows the model to learn a hierarchy of features, from simple patterns to complex abstract concepts, leading to better generalization.
+#figure(
+  image("images/ann.png", width: 40%),
+)
 
-== Artificial Neural Networks (ANNs)
+
+
+== Introduction to GNNs
 #place(top + left, dx: -2.5em)[
-  #subbar([The Training Process])
+  #subbar([From Images to Graphs])
 ]
 #h(1em)
 
-- *The Goal*: To find the optimal set of weights ($W$) and biases ($b$) that allows the network to perform a specific task accurately.
-- *The Mechanism*: This is an optimization problem.
-  - We define a *Loss Function* that measures the error between the network's prediction and the true target.
-  - The famous *backpropagation* algorithm efficiently calculates the gradients (the direction of steepest error increase) for all weights.
-  - An optimizer (like Adam) then updates the weights in the opposite direction of the gradient to minimize the loss.
+- Graph Neural Networks (GNNs) are deep learning methods designed specifically to work on graph-structured data.
+- They are also sometimes referred to as _geometric deep learning_.
+- The core idea behind GNNs is a natural extension of *Convolutional Neural Networks (CNNs)*, which are incredibly successful on regular, grid-like data (e.g., images, text).
 
-== Computational Frameworks
+
+
+== GNNs: The Core Concept
 #place(top + left, dx: -2.5em)[
-  #subbar([The Engine Under the Hood])
+  #subbar([Neighborhood Aggregation])
 ]
 #h(1em)
 
-- *The Computational Graph*: All modern frameworks represent neural networks as a graph where nodes are variables (tensors) and edges are operations. This structure is essential for automatic differentiation (backpropagation).
-- *Two Main Paradigms*:
-  - *Static Graphs (Define-then-Run)*: You define the entire graph structure first, then execute it with data. It's highly optimizable and great for production.
-    - _Example_: TensorFlow (classic).
-  - *Dynamic Graphs (Define-by-Run)*: The graph is built on-the-fly as operations are executed. It's more flexible, intuitive, and easier to debug.
-    - _Example_: PyTorch.
+- A CNN works by applying a kernel that combines inputs from a pixel's local _neighborhood_.
+- We can extend this same concept to graphs, which are non-Euclidean spaces.
+- In a GNN, a node's "neighborhood" is not defined by physical distance, but by the *connections* (edges) embedded in the graph.
+- A GNN layer works by aggregating information from a node's direct neighbors to compute a new, more complex feature representation for that node.
 
-== Computational Frameworks
-#place(top + left, dx: -2.5em)[
-  #subbar([TensorFlow & Keras])
-]
-#h(1em)
 
-- *TensorFlow*:
-  - The de facto industry standard for production ML, developed by Google.
-  - Highly scalable, running on CPUs, GPUs, and custom hardware like TPUs.
-- *Keras API*:
-  - The standard high-level API for TensorFlow.
-  - Provides a simple, scikit-learn-like interface (`.compile()`, `.fit()`, `.predict()`) that abstracts away low-level complexity.
 
-== Computational Frameworks
-#place(top + left, dx: -2.5em)[
-  #subbar([PyTorch])
-]
-#h(1em)
-
-- *PyTorch*:
-  - Developed by Meta AI, it has become a favorite in the research community due to its flexibility.
-  - Its dynamic graph nature feels more "Pythonic" and intuitive for many developers.
-- *Building Models*:
-  - Models are defined as classes inheriting from `torch.nn.Module`.
-  - The training loop is written explicitly, giving the developer full control over every step.
-
-== From Pixels to Nodes
-#place(top + left, dx: -2.5em)[
-  #subbar([Introducing Graph Neural Networks (GNNs)])
-]
-#h(1em)
-
-- The core idea of GNNs is a natural extension of *Convolutional Neural Networks (CNNs)*.
-- A CNN operates on regular, grid-like (Euclidean) data like images. It works by aggregating information from a pixel's *local neighborhood*.
-- A GNN applies the same principle to irregular, non-Euclidean data like graphs. It aggregates information from a node's *local neighborhood* defined by its connections.
-// #figure(
-//   // NOTE: Replace "path/to/image.png" with the path to Figure 3.3 from the book.
-//   image("path/to/euclidean_vs_non_euclidean.png", width: 70%),
-//   caption: [Visual difference between Euclidean and non-Euclidean neighborhoods]
-// )
-
-== How GNNs Work
+== GNNs: How Information is Processed
 #place(top + left, dx: -2.5em)[
   #subbar([Message Passing])
 ]
 #h(1em)
 
-- At each layer, every node updates its state (or "embedding") by aggregating messages from its direct neighbors.
-- This process is often called *message passing*. A simple formulation for a node $i$ at layer $t$ is:
+- Each node is associated with a set of features or a hidden state ($h_i^t$).
+- At each layer ($t$), nodes accumulate input from their neighbors using a simple neural network layer. The basic formula looks like this:
   $ h_i^t = sum_(v_j in N(v_i)) sigma(W h_j^(t-1) + b) $
-- After several layers, the final node embedding $Z$ captures both its own features ($X$) and the topology of its surrounding neighborhood ($A$).
+- This process is applied recursively, with the output of one layer becoming the input for the next.
+- The final result is a rich embedding ($Z$) for each node, which is a function of the initial features ($X$) and the graph's topology ($A$).
   $ Z = "GNN"(X, A) $
 
-== The GNN Ecosystem
+
+
+== Variants of GNNs
 #place(top + left, dx: -2.5em)[
-  #subbar([Key Frameworks])
+  #subbar([The Two Main Approaches])
 ]
 #h(1em)
 
-- Building GNNs from scratch is complex. Specialized libraries simplify this process:
-- *PyTorch Geometric (PyG)*:
-  - Built on PyTorch, it's a vast library containing implementations of hundreds of GNN papers and models.
-- *Deep Graph Library (DGL)*:
-  - A framework-agnostic library (works with PyTorch, TensorFlow) focused on providing efficient and scalable GNN building blocks.
-- *StellarGraph*:
-  - Built on TensorFlow/Keras, known for its user-friendly API but is no longer actively maintained.
+- Many variations of the basic GNN have been proposed to improve their representation learning capabilities and to handle specific types of graphs (directed, dynamic, etc.).
+- There are essentially two main types of convolutional operations for graph data:
+  - *Spectral Approaches*: These methods define convolution in the _spectral domain_ (by decomposing the graph into simpler elements, often using the graph Laplacian).
+  - *Spatial (Non-Spectral) Approaches*: These methods formulate convolution by directly _aggregating feature information_ from a node's local neighbors, as described with message passing.
+- Other improvements also exist, such as adding new mechanisms to the propagation step, like _attention_, _gate mechanisms_, and _skip connections_.
 
-== A Practical Application
-#place(top + left, dx: -2.5em)[
-  #subbar([Link Prediction with a Graph Auto-Encoder])
-]
-#h(1em)
-
-- A common task is *link prediction*: predicting if an edge should exist between two nodes.
-- One way to solve this is with a *Graph Auto-Encoder (GAE)*.
-  - The *Encoder* is a GNN that learns a compressed, low-dimensional embedding ($Z$) for each node.
-  - The *Decoder* uses these embeddings to reconstruct the graph's structure. A simple decoder calculates the inner product of node embeddings to predict a link.
-    $ A' = Z dot Z^T $
-- The model learns by trying to make the reconstructed graph as similar as possible to the original one.
-
-== Conclusion
-#place(top + left, dx: -2.5em)[
-  #subbar([What We've Learned])
-]
-#h(1em)
-
-- ANNs provide a powerful, general framework for learning from data.
-- Deep learning frameworks like TensorFlow and PyTorch make building and training these models accessible.
-- GNNs extend these concepts to the graph domain by leveraging neighborhood information.
-- Specialized libraries like PyG and DGL are the go-to tools for implementing GNNs in practice.
 
 
 = Unsupervised Graph Learning
+
+== Unsupervised Graph Learning
+#place(top + left, dx: -2.5em)[
+  #subbar([What it is?])
+]
+#h(1em)
+
+- The goal is to learn meaningful, low-dimensional representations (embeddings) of nodes, edges, or entire graphs *without using any labels*.
+- The model learns embeddings that preserve the graph's structure by relying only on the adjacency matrix and node features.
+- The learned representation is optimized so that it can be used to *reconstruct pair-wise node similarity* (e.g., rebuild the adjacency matrix).
+- This process encodes latent relationships and allows us to discover novel, hidden patterns in the data.
+
+
 
 == Unsupervised Graph Learning
 #place(top + left, dx: -2.5em)[
@@ -162,32 +303,25 @@
 ]
 #h(1em)
 
-- *The Goal*: To learn meaningful, low-dimensional representations (embeddings) of nodes, edges, or entire graphs *without using any labels*.
+#figure(
+  image("images/unsupervised_mlg.png", width: 70%),
+)
 
-- *The Core Idea*: Learn embeddings that preserve the graph's structure. A good embedding should allow us to reconstruct properties of the original graph, like node similarity.
 
-- *Three Main Approaches We'll Cover*:
-  - Shallow Embedding Methods
-  - Graph Autoencoders
-  - Graph Neural Networks (GNNs)
 
-// #figure(
-//   // NOTE: This slide would show Figure 4.1 from the book.
-//   image("path/to/figure_4.1.png", width: 70%),
-//   caption: [The different families of unsupervised embedding algorithms]
-// )
-
-== Shallow Embedding Methods
+== Unsupervised: Shallow Embedding Methods
 #place(top + left, dx: -2.5em)[
   #subbar([Learning Direct Representations])
 ]
 #h(1em)
 
-- These are _transductive_ methods: they learn an embedding for each specific node in the input graph.
-- They cannot generate embeddings for new nodes without being retrained.
-- We will explore two main categories:
-  - *Matrix Factorization*: Decompose a matrix representation of the graph (like the adjacency matrix) to find latent features.
-  - *Skip-gram*: Use random walks to generate node sequences and learn embeddings by predicting context, inspired by NLP's Word2Vec.
+- Shallow embedding methods are a family of algorithms that learn a unique, low-dimensional vector for each node in a given graph.
+- They are _transductive_. This means they only learn embeddings for the nodes they see during training. They cannot generate embeddings for new, unseen nodes without being completely retrained.
+- We will explore two main categories of these methods:
+  - *Matrix Factorization* based approaches.
+  - *Skip-gram* based approaches, inspired by NLP.
+
+
 
 == Shallow Embedding: Matrix Factorization
 #place(top + left, dx: -2.5em)[
@@ -195,114 +329,195 @@
 ]
 #h(1em)
 
-- *Core Idea*: A graph's adjacency matrix $A$ can be approximated by the product of two lower-dimensional matrices: $A "\appx" Y Y^T$. The rows of $Y$ become our node embeddings.
-- Different methods use different matrix constructions and loss functions to preserve specific properties:
-  - *Graph Factorization (GF)*: A straightforward factorization of the adjacency matrix. Works well for undirected graphs.
-  - *HOPE*: Aims to preserve *higher-order proximity* (e.g., 2-hop neighbors). Uses separate source and target embeddings, making it suitable for directed graphs.
-  - *GraphRep*: Also captures higher-order proximity by computing and concatenating embeddings for k-step transition probabilities.
+- *The Core Idea*: These methods take a matrix representation of the graph—typically the adjacency matrix ($A$)—and decompose it into the product of two or more lower-dimensional matrices.
+- The rows of these resulting low-dimensional matrices serve as the embeddings for the nodes.
+- This process discovers the "latent factors" that explain the graph's structure.
+- *Example Algorithm: Graph Factorization (GF)*
+  - One of the earliest methods, which directly factorizes the adjacency matrix $A$.
+  - It works well for undirected graphs where the adjacency matrix is symmetric.
 
-== Shallow Embedding: Skip-gram
+
+
+== Matrix Factorization: Higher-Order Proximity
 #place(top + left, dx: -2.5em)[
-  #subbar([Learning from Random Walks])
+  #subbar([Looking Beyond Direct Neighbors])
 ]
 #h(1em)
 
-- These methods treat nodes as "words" and random walks as "sentences."
+- Simple factorization often only captures *first-order proximity* (direct connections).
+- More advanced methods aim to preserve *higher-order proximity*, which captures relationships between nodes that are 2, 3, or more hops away.
+- *Example Algorithm: HOPE (Higher-Order Proximity Preserved Embedding)*
+  - Explicitly designed to preserve these longer-range relationships.
+  - It uses two separate embedding matrices (one for "source" roles, one for "target" roles), making it effective for capturing asymmetric relationships in _directed graphs_.
+
+== Shallow Embedding: Skip-gram
+#place(top + left, dx: -2.5em)[
+  #subbar([The Word2Vec Analogy])
+]
+#h(1em)
+
+- This family of methods is inspired by the famous *Word2Vec* algorithm from Natural Language Processing.
+- It re-frames the graph embedding problem as a language modeling problem.
 - *The Process*:
-  1. Generate many random walks (sequences of nodes) from the graph.
-  2. Use a skip-gram model to learn node embeddings by predicting neighboring nodes in the walk.
-- *Key Algorithms*:
-  - *DeepWalk*: Uses simple, unbiased random walks.
-  - *Node2Vec*: Introduces *biased* random walks with parameters `p` (return) and `q` (explore) to balance between capturing local (BFS-like) and global (DFS-like) structure.
+  1. Treat nodes as "words" and generate sequences of nodes ("sentences") by performing many *random walks* on the graph.
+  2. Train a skip-gram neural network model on these "sentences". The model's goal is to predict a node's context (its neighbors in the walk) given the node itself.
+  3. The learned weights of the network's hidden layer become the final node embeddings.
 
-== Shallow Embedding: Skip-gram
+
+
+== Skip-gram: DeepWalk vs. Node2Vec
 #place(top + left, dx: -2.5em)[
-  #subbar([Extending to Edges and Graphs])
+  #subbar([Controlling the Walk])
 ]
 #h(1em)
 
-- *Edge2Vec*:
-  - Not a new training method, but a way to derive *edge embeddings* from pre-trained node embeddings.
-  - Applies a binary operator to the embeddings of the two nodes forming an edge.
-  - Common operators: Average, Hadamard (element-wise product), Weighted L1/L2.
+- *DeepWalk*:
+  - The pioneering algorithm in this category.
+  - It uses simple, completely *unbiased* random walks to explore the graph.
+- *Node2Vec*:
+  - The key innovation is the use of *biased* random walks.
+  - It introduces two parameters, `p` and `q`, that control the walking strategy.
+  - This allows the walk to balance between exploring a node's immediate neighborhood (Breadth-First-Search-like behavior) and exploring distant parts of the graph (Depth-First-Search-like behavior). This flexibility often leads to richer embeddings.
 
-- *Graph2Vec*:
-  - Learns embeddings for an *entire graph*.
-  - It treats a graph as a "document" and its rooted subgraphs as "words."
-  - It then uses a Doc2Vec model to learn a vector representation for each graph.
 
-== Graph Autoencoders
+
+== Skip-gram: DeepWalk vs. Node2Vec
+#place(top + left, dx: -2.5em)[
+  #subbar([Controlling the Walk])
+]
+#h(1em)
+
+#figure(
+  image("images/deep_walk.png", width: 90%),
+)
+
+
+
+== Unsupervised: Autoencoders
 #place(top + left, dx: -2.5em)[
   #subbar([Learning to Reconstruct])
 ]
 #h(1em)
 
-- Autoencoders are _inductive_ methods that can learn non-linear transformations.
-- *Structure*:
-  - An *Encoder* network compresses the input graph (e.g., its adjacency matrix) into a low-dimensional latent vector (the embedding).
-  - A *Decoder* network tries to reconstruct the original adjacency matrix from this embedding.
-- *The Goal*: The network is trained to minimize the reconstruction error. A good, compact embedding should contain all the necessary information to rebuild the graph.
-// #figure(
-//   // NOTE: This slide would show Figure 4.14 from the book.
-//   image("path/to/figure_4.14.png", width: 70%),
-// )
+- Autoencoders are a powerful type of neural network used for unsupervised learning and dimensionality reduction.
+- Unlike methods like PCA, they can learn complex *non-linear* transformations.
+- A key advantage is that they are _inductive_, meaning they learn a general function that can create embeddings for new, unseen data.
+- *The Architecture*:
+  - An *Encoder* network compresses the high-dimensional input into a low-dimensional latent vector (the embedding).
+  - A *Decoder* network takes this embedding and tries to reconstruct the original input.
+
+
+
+== Autoencoders: A Key Variation
+#place(top + left, dx: -2.5em)[
+  #subbar([Denoising for Robustness])
+]
+#h(1em)
+
+- A standard autoencoder can sometimes learn to just copy the input, a trivial "identity function," especially if the embedding space is large.
+- To prevent this and learn more meaningful features, we use *Denoising Autoencoders*.
+- *The Core Idea*:
+  1. Intentionally add noise to (corrupt) the input data.
+  2. Train the autoencoder to reconstruct the original, _clean_ data from the noisy version.
+- This forces the model to learn robust representations that capture the essential characteristics of the data while ignoring the noise.
 
 == Graph Autoencoders
 #place(top + left, dx: -2.5em)[
-  #subbar([Key Considerations])
+  #subbar([Applying to Graph Structures])
 ]
 #h(1em)
 
-- *Denoising Autoencoders*: A powerful variation that learns robust representations by training the model to reconstruct the _original_ graph from a _corrupted_ (noisy) input.
-- *Challenges for Graphs*:
-  - The adjacency matrix is very sparse, so a naive model will just learn to predict zeros.
-  - The absence of an edge (a zero) doesn't imply dissimilarity.
-- *Solution: Structural Deep Network Embedding (SDNE)*
-  - Uses a specialized loss function that penalizes reconstruction errors on existing edges more heavily.
-  - Enforces that connected nodes (1st-order proximity) and nodes with similar neighborhoods (2nd-order proximity) have similar embeddings.
+- We can apply the autoencoder concept to graphs by using the graph's *adjacency matrix* as the input and the target for reconstruction.
+- However, this presents two critical challenges:
+  - *Sparsity*: Most real-world graphs are very sparse, meaning the adjacency matrix is mostly zeros. A naive model will just learn to predict zero everywhere.
+  - *Ambiguity*: The absence of a link (a zero in the matrix) does not necessarily mean two nodes are dissimilar; they might just be disconnected.
 
-== Unsupervised Learning with GNNs
+== Graph Autoencoders in Practice
 #place(top + left, dx: -2.5em)[
-  #subbar([Aggregating Neighborhoods])
+  #subbar([The SDNE Model])
 ]
 #h(1em)
 
-- GNNs are naturally _inductive_ and learn by aggregating information from a node's local neighborhood.
-- In an unsupervised setting, the goal is still to learn embeddings that capture the graph's structure without labels.
-- Two main approaches to graph convolution:
-  - *Spectral Convolution*: Defines convolution in the Fourier domain using the graph's Laplacian matrix. Mathematically elegant but can be computationally intensive.
-  - *Spatial Convolution*: Defines convolution directly by aggregating feature information from neighbors. This approach is more scalable and widely used.
+- To solve these challenges, models like *Structural Deep Network Embedding (SDNE)* use a specialized loss function.
+- The loss function heavily penalizes reconstruction errors on *non-zero* elements (existing edges) more than on zero elements.
+- It combines two objectives to preserve both:
+  - *Second-order proximity*: The main autoencoder loss ensures that nodes with similar neighborhoods have similar embeddings (by reconstructing the adjacency vector).
+  - *First-order proximity*: An additional loss term explicitly forces directly connected nodes to have very close embeddings in the latent space.
 
-== Unsupervised Learning with GNNs
+
+
+== Unsupervised Learning: GNNs
 #place(top + left, dx: -2.5em)[
-  #subbar([GCNs and GraphSAGE])
+  #subbar([The Inductive Approach])
 ]
 #h(1em)
 
-- *Graph Convolutional Networks (GCNs)*:
-  - A popular spectral-based approach.
-  - The core idea is to average the feature representations of a node's neighbors (including itself). Stacking layers allows information to propagate further across the graph.
+- Graph Neural Networks (GNNs) are deep learning methods that operate directly on graphs.
+- A key advantage of GNNs is that they are generally _inductive_, meaning they learn a function that can generate embeddings for new, unseen data.
+- In an unsupervised setting, GNNs are trained to create embeddings that capture the graph's structural properties without any external labels.
+- Two main approaches: _spectral_ and _spatial_ convolution.
 
-- *GraphSAGE*:
-  - A powerful spatial-based approach.
-  - Learns an *aggregator function* (e.g., mean, max-pooling) to gather information from a node's neighbors.
-  - For unsupervised tasks, it's often trained with a loss function that ensures nearby nodes (identified via random walks) have similar embeddings, while distant nodes have dissimilar ones.
-
-== Conclusion
+== Unsupervised GNNs: Spectral Convolution
 #place(top + left, dx: -2.5em)[
-  #subbar([Key Takeaways])
+  #subbar([Operating in the Spectral Domain])
 ]
 #h(1em)
 
-- Unsupervised graph learning is about finding low-dimensional representations of graph data without labels.
-- We explored three main families of methods:
-  - *Shallow Embedding*: Fast and effective but transductive. Learns direct mappings for existing nodes (e.g., `Node2Vec`).
-  - *Graph Autoencoders*: Inductive models that learn by trying to reconstruct the graph's structure from a compressed embedding (e.g., `SDNE`).
-  - *Graph Neural Networks*: Inductive models that learn node representations by recursively aggregating information from their local neighborhoods (e.g., `GraphSAGE`).
+- Spectral methods are based on _spectral graph theory_ and define convolution in the Fourier domain, using the graph's *Laplacian matrix*.
+- While mathematically elegant, they can be computationally expensive.
+- A well-known and simplified propagation rule (from GCNs by Kipf & Welling) is a key example:
+  $ H^(l+1) = sigma(hat(D)^(-1/2) hat(A) hat(D)^(-1/2) H^(l) W^(l)) $
+- *Limitations*:
+  - These methods often require processing the entire graph at once.
+  - They typically assume a fixed graph, which can make it difficult to generalize to new graph structures.
+
+== Unsupervised GNNs: Spatial Convolution
+#place(top + left, dx: -2.5em)[
+  #subbar([Aggregating Neighbors Directly])
+]
+#h(1em)
+
+- Spatial methods, like *GraphSAGE*, perform convolution by directly aggregating feature information from a node's local neighborhood.
+- This approach is more scalable and flexible.
+- *How it works for unsupervised learning*:
+  - The model is trained using a loss function based on node similarity, often derived from random walks.
+  - The goal is to learn embeddings that ensure:
+    - Nodes that are "close" (e.g., appear in the same random walk) have *similar* vector representations.
+    - Nodes that are "distant" have *dissimilar* vector representations.
+
+== Unsupervised GNNs in Practice
+#place(top + left, dx: -2.5em)[
+  #subbar([A Self-Supervised Example])
+]
+#h(1em)
+
+- A common way to train a GNN without labels is to create a *self-supervised* task.
+- The model learns to predict some intrinsic property of the graph itself.
+- *Example: Learning Graph-Level Embeddings*
+  1. Take a dataset of many individual graphs (e.g., the PROTEINS dataset).
+  2. Define a "ground-truth" distance between any pair of graphs (e.g., based on their Laplacian spectrum).
+  3. Train a GNN-based Siamese network to predict this distance.
+- By learning to predict the distance, the GNN is forced to learn a meaningful embedding for each graph that encodes its unique structural properties.
 
 
 
-  = Supervised Graph Learning
+= Supervised Graph Learning
+
+== Supervised Graph Learning
+#place(top + left, dx: -2.5em)[
+  #subbar([What it is?])
+]
+#h(1em)
+
+- In supervised learning, our training set consists of pairs of `(x, y)`, where `x` is the graph input and `y` is a known output label.
+- We aim to learn the function that maps inputs to these labels.
+- Four main approaches:
+  - Feature-Based Methods
+  - Shallow Embedding Methods
+  - Graph Regularization Methods
+  - Graph Neural Networks (GNNs)
+
+
 
 == Supervised Graph Learning
 #place(top + left, dx: -2.5em)[
@@ -310,69 +525,72 @@
 ]
 #h(1em)
 
-- *The Goal*: To learn a mapping function from input graph data ($x$) to a known output label ($y$).
-- This is the most common practical machine learning task.
-- We will cover:
-  - *Classification*: When the label $y$ is a discrete category (e.g., "is enzyme" vs. "is not enzyme").
-  - *Regression*: When the label $y$ is a continuous value (e.g., predicting the number of posts).
-  - *Semi-Supervised Learning*: A hybrid approach using a small set of labeled data and a larger set of unlabeled data.
 
-== Supervised Graph Learning
+#figure(
+  image("images/supervised_mlg.png", width: 80%),
+)
+
+
+
+== Supervised: Feature-Based Methods
 #place(top + left, dx: -2.5em)[
-  #subbar([Main Approaches])
+  #subbar([The Classic Approach])
 ]
 #h(1em)
 
-- We will explore four main families of supervised methods for graphs:
-  - *Feature-Based Methods*: The simplest approach, using graph metrics as features for traditional ML models.
-  - *Shallow Embedding Methods*: Transductive methods that propagate labels from known nodes to unknown ones.
-  - *Graph Regularization Methods*: Using the graph's structure to constrain and improve the learning process.
-  - *Graph Neural Networks (GNNs)*: End-to-end models that learn representations tailored to the prediction task.
+- This is one of the simplest, yet often powerful, methods for applying machine learning to graphs.
+- It's a straightforward two-step process:
+  1. *Feature Extraction*: For each node or graph, manually compute a set of descriptive structural properties. These could be any of the related metrics, like:
+    - Number of edges
+    - Average clustering coefficient
+    - Centrality scores
+  2. *Train a Classic Classifier*: Use these computed properties as a standard feature vector to train a traditional ML algorithm like an SVM, Random Forest, or Logistic Regression.
 
-// #figure(
-//   // NOTE: This slide would show Figure 5.1 from the book.
-//   image("path/to/figure_5.1.png", width: 80%),
-//   caption: [Hierarchical structure of supervised embedding algorithms]
-// )
+
 
 == Feature-Based Methods
 #place(top + left, dx: -2.5em)[
-  #subbar([A Simple, Yet Powerful Approach])
+  #subbar([Pros and Cons])
 ]
 #h(1em)
 
-- This method acts in two simple steps:
-  1. *Feature Extraction*: For each graph or node, compute a set of descriptive structural properties (e.g., average degree, global efficiency, clustering coefficient).
-  2. *Traditional ML*: Use these computed properties as a feature vector to train a standard classifier like an *SVM* or *Random Forest*.
-- *Pros*:
-  - Straightforward to implement.
-  - Highly interpretable features.
-- *Cons*:
-  - Relies heavily on manual *feature engineering*.
-  - May fail to capture complex, latent relationships in the data.
+- *Strengths*:
+  - Easy to implement and understand.
+  - The features are highly interpretable (e.g., "number of edges is predictive of class X").
+  - Leverages well-established and trusted ML techniques.
 
-== Shallow Embedding Methods
+- *Weaknesses*:
+  - Relies heavily on manual *feature engineering*, which can be time-consuming and requires domain expertise.
+  - The chosen features might not be optimal and could fail to capture the complex, latent relationships within the graph structure.
+
+
+
+== Supervised: Shallow Embedding Methods
 #place(top + left, dx: -2.5em)[
   #subbar([Propagating Information])
 ]
 #h(1em)
 
-- These are _transductive_, semi-supervised algorithms designed for *node classification*.
-- The core idea is simple: labels from a few known nodes are "propagated" to their unlabeled neighbors through the graph structure.
-- Two key algorithms demonstrate this principle:
-  - *Label Propagation*
-  - *Label Spreading*
+- These are semi-supervised, _transductive_ algorithms designed for *node classification*.
+- They are ideal for scenarios where you have a small number of labeled nodes and a large number of unlabeled ones.
+- The core idea is that labels from the few known nodes are iteratively "propagated" to their unlabeled neighbors through the graph's edge structure, based on the assumption that "nearby nodes likely have the same label."
+
+
 
 == Shallow Embedding: Label Propagation
 #place(top + left, dx: -2.5em)[
-  #subbar([Spreading the Truth])
+  #subbar([A Simple Iterative Method])
 ]
 #h(1em)
 
-- An iterative algorithm where each node adopts the label that is most common among its neighbors.
-- This process repeats until a consensus is reached, and no node changes its label.
-- *Key Constraint*: The labels of the initially known nodes are considered "ground truth" and are *fixed*—they cannot be changed during the propagation process.
-- *Limitation*: This makes the algorithm very sensitive to noise or errors in the initial labels. An incorrect initial label will propagate its error to its neighbors.
+- This is a well-known algorithm that works as follows:
+  1. Each unlabeled node is initialized with a probability distribution over the labels.
+  2. In each iteration, every node updates its label distribution to match the average of its neighbors' distributions.
+  3. This process repeats until the labels in the network stabilize.
+- The labels of the initially known nodes are considered "ground truth" and are *fixed*—they are reset to their original value at every iteration.
+- Main limitation: This makes the algorithm very sensitive to noise or errors in the initial labels.
+
+
 
 == Shallow Embedding: Label Spreading
 #place(top + left, dx: -2.5em)[
@@ -380,224 +598,51 @@
 ]
 #h(1em)
 
-- An evolution of Label Propagation that addresses its main limitation.
-- It *relaxes* the constraint on the initial labels, allowing them to change during the iterative process.
-- Introduces a regularization parameter ($alpha$) that balances the influence of two forces:
+- This algorithm is an evolution of Label Propagation that addresses its main limitation.
+- It *relaxes* the constraint on the initial labels, allowing their distributions to change during the iterative process.
+- It introduces a regularization parameter ($alpha$) that balances the influence of two forces:
   - Adhering to the graph structure (information from neighbors).
-  - Sticking to the initial label assignment.
-- This makes the algorithm more *robust to noisy initial labels*.
+  - Sticking to the initial "ground truth" label assignment.
+- This makes the algorithm more *robust to noisy initial labels*, as it can "correct" a potentially wrong initial label if its neighbors strongly disagree.
 
-== Graph Regularization Methods
+
+
+== Supervised: Graph Regularization
 #place(top + left, dx: -2.5em)[
   #subbar([Using the Graph as a Constraint])
 ]
 #h(1em)
 
-- This approach integrates the graph structure directly into the model's *loss function*.
+- This is a powerful technique that integrates the graph structure directly into a model's *loss function*.
 - *Core Assumption (Manifold Hypothesis)*: Connected nodes in the graph should have similar predictions or embeddings.
 - The total loss function combines two terms:
   $ "Loss" = "Loss"_("supervised") + "Loss"_("graph") $
   - The *supervised loss* ensures the model fits the labeled data.
-  - The *graph loss* penalizes the model if connected nodes have dissimilar predictions, enforcing "smoothness."
+  - The *graph loss* penalizes the model if connected nodes have dissimilar predictions, enforcing "smoothness" and improving generalization.
 
-== Graph Regularization Methods
+
+
+== Supervised: Graph Neural Networks
 #place(top + left, dx: -2.5em)[
-  #subbar([Manifold Learning & Deeper Architectures])
+  #subbar([The End-to-End Approach])
 ]
 #h(1em)
 
-- *Manifold Regularization*: A classic approach where the graph regularization term is based on the *Laplacian matrix* ($f^T L f$). This is the foundation for models like *LapSVM*.
-- *Semi-Supervised Embedding*: Extends this idea to deep learning. Instead of regularizing just the final output, it applies the graph-based constraint to the outputs of *intermediate hidden layers* of a neural network.
-- This forces the network to learn embeddings that respect the graph's topology.
-
-== Graph Regularization Methods
-#place(top + left, dx: -2.5em)[
-  #subbar([Modern Frameworks])
-]
-#h(1em)
-
-- *Neural Structured Learning (NSL)*: A powerful TensorFlow framework that makes it easy to add graph regularization to _any_ standard neural network with just a few lines of code.
-- *Planetoid*: A model that extends skip-gram approaches (like Node2Vec) to a semi-supervised setting. It is trained with a combined loss function:
-  - An *unsupervised loss* to preserve graph structure (predicting context in random walks).
-  - A *supervised loss* to correctly classify the labeled nodes.
-
-== Supervised Learning with GNNs
-#place(top + left, dx: -2.5em)[
-  #subbar([End-to-End Learning])
-]
-#h(1em)
-
-- GNNs provide the most powerful and integrated approach for supervised graph learning.
+- GNNs provide the most powerful and flexible approach for supervised graph learning.
 - The GNN acts as an *encoder*, learning rich feature representations of nodes or graphs that are specifically tailored to the supervised task.
 - The final embeddings from the GNN are then passed to a standard classification or regression head (e.g., a Dense layer) to make the final prediction.
-- The entire model, from the graph structure to the final prediction, is trained *end-to-end*.
+- The entire model, from the graph structure to the final prediction, is trained *end-to-end*, so the GNN learns the most predictive features automatically.
 
-== Supervised Learning with GNNs
+== Supervised GNNs in Practice
 #place(top + left, dx: -2.5em)[
-  #subbar([Practical Examples])
+  #subbar([Examples])
 ]
 #h(1em)
 
-- *Graph Classification with GCNs*:
+GNNs can be applied to any supervised graph task. For example:
+- Graph Classification with GCNs:
   - *Task*: Classify entire graphs (e.g., is a protein an enzyme?).
-  - *Example*: On the PROTEINS dataset, a GCN backbone learns graph-level embeddings, which are then processed by 1D convolutional layers to produce a final classification.
-
-- *Node Classification with GraphSAGE*:
-  - *Task*: Classify individual nodes within a larger graph (e.g., what is the research topic of a paper in a citation network?).
-  - *Example*: On the Cora dataset, a GraphSAGE model learns embeddings for each paper, which are then fed to a Dense layer with a softmax activation for topic classification.
-
-== Conclusion
-#place(top + left, dx: -2.5em)[
-  #subbar([Key Takeaways])
-]
-#h(1em)
-
-- Supervised graph learning leverages known labels to train predictive models.
-- We've seen a progression of methods with increasing complexity and power:
-  - *Feature-Based*: Simple and interpretable but requires manual effort.
-  - *Shallow Embedding*: Effective for semi-supervised node classification by propagating labels.
-  - *Graph Regularization*: Improves standard ML models by using the graph as a powerful constraint.
-  - *GNNs*: Offer a flexible, end-to-end approach that learns the best features directly from the data for the task at hand.
-
-
-
-  = Solving Common Graph ML Problems
-
-== Solving Common Graph ML Problems
-#place(top + left, dx: -2.5em)[
-  #subbar([Today's Class])
-]
-#h(1em)
-
-- In this class, we'll move from theory to practice, applying the models we've learned to solve some of the most common and important tasks in the world of graphs.
-- We will cover three core problems:
-  - *Predicting Missing Links*: Completing a partially known graph.
-  - *Detecting Communities*: Finding meaningful clusters and structures.
-  - *Measuring Graph Similarity*: Quantifying how alike two graphs are.
-
-== Predicting Missing Links
-#place(top + left, dx: -2.5em)[
-  #subbar([The Graph Completion Problem])
-]
-#h(1em)
-
-- *The Goal*: Given a partially observed graph, we want to predict whether a link exists between any two nodes that are not currently connected.
-- *Formal Definition*: For a graph $G=(V, E)$, where $E = E_o "\union" E_u$, we use the known links ($E_o$) to predict the unknown ones ($E_u$).
-- *Why is this useful?*
-  - *Recommender Systems*: Suggesting friends on social media or products on e-commerce sites.
-  - *Bioinformatics*: Identifying undiscovered protein-protein interactions.
-  - *Criminal Investigations*: Uncovering hidden connections between individuals.
-
-== Predicting Missing Links
-#place(top + left, dx: -2.5em)[
-  #subbar([Similarity-Based Heuristics])
-]
-#h(1em)
-
-- The simplest approach is to calculate a *similarity score* for a pair of nodes. A higher score implies a higher probability of a link.
-- These methods are fast and intuitive, relying on local neighborhood information.
-- *Key Index-Based Methods*:
-  - *Resource Allocation Index*: Common neighbors are weighted by their degree. A common neighbor with few connections is more significant.
-    $ "RAI"(u,v) = sum_(w in N(u) sect N(v)) 1/|N(w)| $
-  - *Jaccard Coefficient*: The ratio of common neighbors to the total number of unique neighbors.
-    $ "Jaccard"(u,v) = (|N(u) sect N(v)|) / (|N(u) union N(v)|) $
-  - *Community-Based Methods*: These extend the above indices by adding a bonus if the common neighbors belong to the same community.
-
-== Predicting Missing Links
-#place(top + left, dx: -2.5em)[
-  #subbar([An Embedding-Based Approach])
-]
-#h(1em)
-
-- We can frame link prediction as a *supervised binary classification task*.
-- *The Pipeline*:
-  1. *Split Data*: Divide known edges into a training set and a test set. Create negative examples (pairs of nodes with no link).
-  2. *Learn Node Embeddings*: Train a node embedding model (like `Node2Vec`) *only on the training graph* to avoid data leakage.
-  3. *Create Edge Features*: For each positive and negative edge pair, create an edge embedding (e.g., using a Hadamard operator on the node embeddings).
-  4. *Train a Classifier*: Use these edge embeddings as features to train a standard ML model (like a `RandomForest`) to predict the label (0 or 1).
-  5. *Evaluate*: Test the classifier's performance on the hold-out test set.
-
-== Detecting Communities
-#place(top + left, dx: -2.5em)[
-  #subbar([Finding Meaningful Structures])
-]
-#h(1em)
-
-- *The Goal*: Partition a graph's nodes into groups (communities) that are densely connected internally but only sparsely connected to other groups.
-- This is a fundamental task for understanding the macro-structure of a network.
-- *Two Main Types of Detection*:
-  - *Non-overlapping*: Each node belongs to exactly one community.
-  - *Overlapping*: A node can belong to multiple communities, which often reflects real-world scenarios (e.g., a person can be part of a family, a work team, and a sports club).
-
-== Detecting Communities
-#place(top + left, dx: -2.5em)[
-  #subbar([Key Algorithmic Approaches])
-]
-#h(1em)
-
-- *Embedding-Based*:
-  - The simplest modern approach.
-  - First, compute node embeddings (e.g., using `HOPE`, `Node2Vec`).
-  - Then, apply a standard clustering algorithm (like `K-Means` or `GaussianMixture`) on the resulting embedding vectors.
-- *Cost Function Minimization*:
-  - Define a quality metric for a given partition and try to optimize it.
-  - The most famous metric is *modularity*, which measures how much denser the connections are within communities compared to a random network.
-  - The *Louvain method* is a fast and highly effective greedy algorithm for maximizing modularity.
-
-== Graph Similarity & Matching
-#place(top + left, dx: -2.5em)[
-  #subbar([Quantifying How Alike Graphs Are])
-]
-#h(1em)
-
-- *The Goal*: To learn a quantitative measure of similarity between two graphs (or nodes, or subgraphs).
-- *Why is this useful?*
-  - *Classification & Clustering*: Grouping similar graphs (e.g., molecules with similar properties).
-  - *Knowledge Transfer*: Applying a solution from one network to a similar one.
-- *The Challenge*: Traditional distance metrics (like Euclidean) don't work on non-Euclidean graph structures. Exact methods like graph isomorphism are often computationally intractable (NP-complete).
-
-== Graph Similarity & Matching
-#place(top + left, dx: -2.5em)[
-  #subbar([Learning Similarity Metrics])
-]
-#h(1em)
-
-- *Graph Embedding-Based Methods*:
-  - Learn a vector representation for each graph (e.g., using `Graph2Vec`).
-  - The similarity can then be computed as the distance (e.g., cosine similarity) between these embedding vectors in the latent space.
-- *Graph Kernel-Based Methods*:
-  - Define similarity based on counting common substructures (like random walks, shortest paths, or small subgraphs called graphlets).
-  - *Deep Graph Kernels (DGK)* is a notable example that treats substructures as "words" and uses NLP techniques to learn representations.
-- *GNN-Based Methods*:
-  - The most powerful and flexible approach.
-  - They *jointly learn* the graph representation and the similarity function in an end-to-end manner, often using a "Siamese" (two-branch) network architecture.
-
-== Graph Similarity & Matching
-#place(top + left, dx: -2.5em)[
-  #subbar([Real-World Applications])
-]
-#h(1em)
-
-- Graph similarity learning is being applied in many cutting-edge domains:
-  - *Chemistry & Bioinformatics*: Finding chemical compounds with similar structures or functions.
-  - *Neuroscience*: Comparing brain connectivity networks between individuals to study diseases.
-  - *Computer Vision*: Recognizing human actions by comparing skeletal pose graphs over time.
-  - *Computer Security*: Detecting vulnerabilities by matching patterns in code dependency graphs.
-
-// #figure(
-//   // NOTE: This slide would show Figure 6.4 from the book.
-//   image("path/to/figure_6.4.png", width: 80%),
-//   caption: [Graphs can represent diverse objects for similarity comparison]
-// )
-
-== Conclusion
-#place(top + left, dx: -2.5em)[
-  #subbar([Key Takeaways])
-]
-#h(1em)
-
-- We've explored how to apply graph ML to three fundamental problems.
-- *Link Prediction*: Can be solved with fast heuristics or more powerful supervised embedding-based models.
-- *Community Detection*: Algorithms exist to partition graphs based on embeddings or by optimizing a quality score like modularity.
-- *Graph Similarity*: While challenging, ML provides powerful tools to learn meaningful similarity metrics, with GNNs being the state-of-the-art.
-- These tasks form the basis for many real-world, high-impact applications of graph machine learning.
+  - *Method*: A GCN backbone learns a representation for the entire graph, which is then fed into a classifier.
+- Node Classification with GraphSAGE:
+  - *Task*: Classify individual nodes within a larger graph (e.g., what is the research topic of a paper?).
+  - *Method*: A GraphSAGE model learns embeddings for each node based on its local neighborhood, and these embeddings are then used to make a classification.
