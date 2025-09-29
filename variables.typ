@@ -26,6 +26,7 @@
   cap3p2: "Chapter 3 Part 2 - Web Page Rank Algorithms",
   cap3p3: "Chapter 3 Part 3 - Modern Web Search Approaches",
   cap3p4: "Chapter 3 Part 4 - Graph Neural Networks",
+  cap4p2: "Chapter 4 Part 2 - Web Logs and Session Reconstruction"
 )
 
 // Subtitulos
