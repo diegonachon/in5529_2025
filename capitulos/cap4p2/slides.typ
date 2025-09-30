@@ -511,17 +511,17 @@
 #align(center)[
   Session 1
   #{
-      show table.cell: set text(size:12pt)
-      table(
-      columns: 4,
-      stroke: 1pt,
-      align: center,
-      [*Time*], [*IP*], [*URL*], [*Ref*],
-      "01:15:00 AM", "1.2.3.4", "A", "-",
-      "01:30:00 AM", "1.2.3.4", "B", "A",
-      "01:36:00 AM", "1.2.3.4", "D", "B",
-      "01:36:00 AM", "1.2.3.4", "E", "D",
-      "01:36:00 AM", "1.2.3.4", "C", "B",
+    show table.cell: set text(size:12pt)
+    table(
+    columns: 4,
+    stroke: 1pt,
+    align: center,
+    [*Time*], [*IP*], [*URL*], [*Ref*],
+    "01:15:00 AM", "1.2.3.4", "A", "-",
+    "01:30:00 AM", "1.2.3.4", "B", "A",
+    "01:36:00 AM", "1.2.3.4", "D", "B",
+    "01:36:00 AM", "1.2.3.4", "E", "D",
+    "01:36:00 AM", "1.2.3.4", "C", "B",
     )
   }
 ]
@@ -593,9 +593,7 @@
 
 - For many practical applications, we can represent each user transaction as a vector over the $n$-dimensional space of pageviews.
 - Given the transaction $t$ above, the transaction vector $bold(t)$ is given by:
-
   $ bold(t) = (w_(p_1)^t, w_(p_2)^t, ..., w_(p_n)^t) $
-
 - where each $w_(p_i)^t = w(p_j^t)$ for some $j$ in $\{1, 2, ..., n\}$, if $p_j$ appears in the transaction $t$ and $w_(p_j)^t = 0$ otherwise.
 - Then, the set of all user transactions can be viewed as an $m times n$ *user-pageview matrix (UPM)*.
 
@@ -635,8 +633,8 @@
 - It's possible to *integrate* other sources of knowledge, such as semantic information from content of Web pages (textual features).
 - Each pageview $p$ can be represented as a $r$-dimensional feature vector, where $r$ is the total number of extracted features (words or concepts) from the site in a global dictionary.
 - This vector $bold(p)$ can be given by:
-  - $bold(p) = ("fw"^p(f_1), "fw"^p(f_2), ..., "fw"^p(f_r))$
-  - Where $"fw"^p(f_j)$ is the weight of the $j$th feature ($f_j$) in the pageview $p$, for $1 <= j <= r$.
+  - $bold(p) = ("fw"^p (f_1), "fw"^p (f_2), ..., "fw"^p (f_r))$
+  - Where $"fw"^p (f_j)$ is the weight of the $j$th feature ($f_j$) in the pageview $p$, for $1 <= j <= r$.
 - For the whole collection of pageviews in the site, we then have an $n times r$ *pageview-feature matrix* $"PFM" = \{bold(p)_1, bold(p)_2, ..., bold(p)_n\}$
 
 
@@ -650,17 +648,20 @@
 - PFM example:
 
 #align(center)[
-  #table(
-    columns: 11,
-    stroke: 1pt,
-    align: center,
-    [], [*web*], [*data*], [*mining*], [*business*], [*intelligence*], [*marketing*], [*ecommerce*], [*search*], [*information*], [*retrieval*],
-    [*A.html*], "0", "0", "0", "1", "1", "1", "0", "1", "1", "1",
-    [*B.html*], "0", "1", "1", "1", "1", "1", "1", "0", "0", "0",
-    [*C.html*], "1", "1", "1", "0", "0", "0", "1", "1", "1", "1",
-    [*D.html*], "1", "1", "1", "0", "0", "0", "0", "0", "1", "1",
-    [*E.html*], "1", "0", "0", "0", "1", "1", "0", "0", "1", "1",
-  )
+  #{
+    show table.cell: set text(size:15pt)
+    table(
+      columns: 11,
+      stroke: 1pt,
+      align: center,
+      [], [*web*], [*data*], [*mining*], [*business*], [*intelligence*], [*marketing*], [*ecommerce*], [*search*], [*information*], [*retrieval*],
+      [*A.html*], "0", "0", "0", "1", "1", "1", "0", "1", "1", "1",
+      [*B.html*], "0", "1", "1", "1", "1", "1", "1", "0", "0", "0",
+      [*C.html*], "1", "1", "1", "0", "0", "0", "1", "1", "1", "1",
+      [*D.html*], "1", "1", "1", "0", "0", "0", "0", "0", "1", "1",
+      [*E.html*], "1", "0", "0", "0", "1", "1", "0", "0", "1", "1",
+    )
+  }
 ]
 
 
@@ -704,20 +705,25 @@
   gutter: 1em,
   align(center)[
     UPM
-    #table(
-      columns: 6, stroke: 1pt, align: center,
-      [], [*A.html*], [*B.html*], [*C.html*], [*D.html*], [*E.html*],
-      [*user1*], "1", "0", "1", "0", "1",
-      [*user2*], "1", "1", "0", "0", "1",
-      [*user3*], "0", "1", "1", "1", "0",
-      [*user4*], "1", "0", "1", "1", "1",
-      [*user5*], "1", "1", "0", "0", "1",
-      [*user6*], "1", "0", "1", "1", "1",
-    )
+    #{
+      show table.cell: set text(size:12pt)
+      table(
+        columns: 6, stroke: 1pt, align: center,
+        [], [*A.html*], [*B.html*], [*C.html*], [*D.html*], [*E.html*],
+        [*user1*], "1", "0", "1", "0", "1",
+        [*user2*], "1", "1", "0", "0", "1",
+        [*user3*], "0", "1", "1", "1", "0",
+        [*user4*], "1", "0", "1", "1", "1",
+        [*user5*], "1", "1", "0", "0", "1",
+        [*user6*], "1", "0", "1", "1", "1",
+      )
+    }
   ],
   align(center)[
     Term-pageview matrix
-    #table(
+    #{
+      show table.cell: set text(size:12pt)
+      table(
       columns: 6, stroke: 1pt, align: center,
       [], [*A.html*], [*B.html*], [*C.html*], [*D.html*], [*E.html*],
       [*web*], "0", "0", "1", "1", "1",
@@ -730,7 +736,8 @@
       [*search*], "1", "0", "1", "0", "0",
       [*information*], "1", "0", "1", "1", "1",
       [*retrieval*], "1", "0", "1", "1", "1",
-    )
+      )
+    }
   ],
 )
 
@@ -745,18 +752,21 @@
 - Content-Enhanced Transaction Matrix example:
 
 #align(center)[
-  #table(
-    columns: 11,
-    stroke: 1pt,
-    align: center,
-    [], [*web*], [*data*], [*mining*], [*business*], [*intelligence*], [*marketing*], [*ecommerce*], [*search*], [*information*], [*retrieval*],
-    [*user1*], "2", "1", "1", "1", "2", "2", "1", "2", "3", "3",
-    [*user2*], "1", "1", "1", "2", "3", "3", "1", "1", "2", "2",
-    [*user3*], "2", "3", "3", "1", "1", "1", "2", "1", "2", "2",
-    [*user4*], "3", "2", "2", "1", "2", "2", "1", "2", "4", "4",
-    [*user5*], "1", "1", "1", "2", "3", "3", "1", "1", "2", "2",
-    [*user6*], "3", "2", "2", "1", "2", "2", "1", "2", "4", "4",
-  )
+  #{
+    show table.cell: set text(size:14pt)
+    table(
+      columns: 11,
+      stroke: 1pt,
+      align: center,
+      [], [*web*], [*data*], [*mining*], [*business*], [*intelligence*], [*marketing*], [*ecommerce*], [*search*], [*information*], [*retrieval*],
+      [*user1*], "2", "1", "1", "1", "2", "2", "1", "2", "3", "3",
+      [*user2*], "1", "1", "1", "2", "3", "3", "1", "1", "2", "2",
+      [*user3*], "2", "3", "3", "1", "1", "1", "2", "1", "2", "2",
+      [*user4*], "3", "2", "2", "1", "2", "2", "1", "2", "4", "4",
+      [*user5*], "1", "1", "1", "2", "3", "3", "1", "1", "2", "2",
+      [*user6*], "3", "2", "2", "1", "2", "2", "1", "2", "4", "4",
+    )
+  }
 ]
 
 
@@ -865,10 +875,8 @@
 
 - Where:
   - The significance weight, $"weight"(p, "pr"_("cl"))$, of the page $p$ within the aggregate profile $"pr"_("cl")$ is given by:
-
     $ "weight"(p, "pr"_("cl")) = frac(1, abs("cl")) sum_(s in "cl") w(p, bold(s)) $
-
-  - $abs("cl")$: number of transactions in cluster $"cl"$.
+  - $abs("cl")$: number of transactions in cluster _cl_.
   - $w(p, bold(s))$ is the weight of page $p$ in transaction vector $bold(s)$ of cluster $"cl"$.
   - $mu$: threshold used to focus only on those pages in the cluster that appear in a sufficient number of vectors in that cluster.
 
@@ -903,45 +911,75 @@ User clusters example:
     - Pages B and F are the most significant pages characterizing the common interest of users in this segment.
     - Page C only appears in one transaction and might be removed given a threshold greater than 0.25.
   ],
-  // align(center)[
-  //   #table(
-  //     columns: 7,
-  //     stroke: 1pt,
-  //     align: center,
-  //     [], [*A*], [*B*], [*C*], [*D*], [*E*], [*F*],
-  //     (cell.x: 1, stroke: (top: 1pt)),
-  //     (cell.x: 2, stroke: (top: 1pt)),
-  //     (cell.x: 3, stroke: (top: 1pt)),
-  //     (cell.x: 4, stroke: (top: 1pt)),
-  //     (cell.x: 5, stroke: (top: 1pt)),
-  //     (cell.x: 6, stroke: (top: 1pt)),
-  //     [*user1*], "0", "0", "1", "1", "0", "0",
-  //     [*user4*], "0", "0", "1", "1", "0", "0",
-  //     [*user7*], "0", "0", "1", "1", "0", "0",
-  //     [*user0*], "1", "1", "0", "0", "0", "1",
-  //     [*user3*], "1", "1", "0", "0", "0", "1",
-  //     [*user6*], "1", "1", "0", "0", "0", "1",
-  //     [*user9*], "0", "1", "1", "0", "0", "1",
-  //     [*user2*], "1", "0", "0", "1", "1", "0",
-  //     [*user5*], "1", "0", "0", "1", "1", "0",
-  //     [*user8*], "1", "0", "1", "1", "1", "0",
-  //   )
-  // ],
-  // align(center)[
-  //   #table(
-  //     columns: 2,
-  //     stroke: 1pt,
-  //     align: center,
-  //     cell(colspan: 2, align: center)[
-  //       [*Aggregated Profile* \ *for Cluster 1*]
-  //     ],
-  //     [*Weight*], [*Pageview*],
-  //     "1.00", "B",
-  //     "1.00", "F",
-  //     "0.75", "A",
-  //     "0.25", "C",
-  //   )
-  // ],
+  align(center)[
+    #{
+      show table.cell: set text(size:14pt)
+      set table(        
+        stroke: (x, y) => (
+          top: if x != 0 and y == 0 {1pt} 
+              else {if y == 1 {1pt}
+              else {if y == 4 {1pt}
+              else {if y == 8 {1pt}
+              else {0pt}}}},
+          left: if x == 0 and y != 0 {1pt} 
+                else {if x == 1 {1pt} 
+                else {0pt}},
+          right: if x == 0 and y == 0 {0pt} else {1pt},
+          bottom: if x == 0 and y == 0 {0pt} else {1pt}
+        ),
+
+        // inset: (x: 5pt, y: 3pt),
+      )
+      
+      table(
+        columns: 7,
+        align: center,
+        [], [*A*], [*B*], [*C*], [*D*], [*E*], [*F*],    
+        [*user1*], "0", "0", "1", "1", "0", "0",
+        [*user4*], "0", "0", "1", "1", "0", "0",
+        [*user7*], "0", "0", "1", "1", "0", "0",
+        [*user0*], "1", "1", "0", "0", "0", "1",
+        [*user3*], "1", "1", "0", "0", "0", "1",
+        [*user6*], "1", "1", "0", "0", "0", "1",
+        [*user9*], "0", "1", "1", "0", "0", "1",
+        [*user2*], "1", "0", "0", "1", "1", "0",
+        [*user5*], "1", "0", "0", "1", "1", "0",
+        [*user8*], "1", "0", "1", "1", "1", "0",
+      )
+    }
+  ],
+  align(center)[
+    #{
+      show table.cell: set text(size:14pt)
+      set table(        
+        stroke: (x, y) => (
+          top: if x != 0 and y == 0 {1pt} 
+              else {if y == 1 {1pt}
+              else {if y == 4 {1pt}
+              else {if y == 8 {1pt}
+              else {0pt}}}},
+          left: if x == 0 and y != 0 {1pt} 
+                else {if x == 1 {1pt} 
+                else {0pt}},
+          right: if x == 0 and y == 0 {0pt} else {1pt},
+          bottom: if x == 0 and y == 0 {0pt} else {1pt}
+        ),
+
+        // inset: (x: 5pt, y: 3pt),
+      )
+    table(
+      columns: 2,
+      stroke: 1pt,
+      align: center,
+      table.cell(colspan: 2, [*Aggregated Profile for Cluster 1*]),
+      [*Weight*], [*Pageview*],
+      "1.00", "B",
+      "1.00", "F",
+      "0.75", "A",
+      "0.25", "C",
+    )
+    }
+  ],
 )
 
 
