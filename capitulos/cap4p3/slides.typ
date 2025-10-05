@@ -400,6 +400,15 @@ $ "pred"(a,p) = overline(r)_a + frac(sum_(b in N) ["sim"(a, b) * (r_(b, p) - ove
   - the rating matrix is directly used to find neighbors / make predictions
   - does not scale for most real-world scenarios
   - large e-commerce sites have tens of millions of customers and millions of items
+
+
+
+== Collaborative Filtering
+#place(top + left, dx: -2.5em)[
+  #subbar([Memory-based and model-based approaches])
+]
+#v(1em)
+
 - Model-based approaches
   - based on an offline pre-processing or "model-learning" phase
   - at run-time, only the learned model is used to make predictions
@@ -407,7 +416,6 @@ $ "pred"(a,p) = overline(r)_a + frac(sum_(b in N) ["sim"(a, b) * (r_(b, p) - ove
   - large variety of techniques used
   - model-building and updating can be computationally expensive
   - item-based CF is an example for model-based approaches
-
 
 
 == Collaborative Filtering
@@ -482,6 +490,15 @@ $ "sim"(a,b) = frac(sum_(u in U) (r_(u,a) - overline(r)_u) (r_(u,b) - overline(r
   - Calculate all pair-wise item similarities in advance
   - The neighborhood to be used at run-time is typically rather small, because only items are taken into account which the user has rated
   - Item similarities are supposed to be more stable than user similarities
+
+
+
+== Collaborative Filtering
+#place(top + left, dx: -2.5em)[
+  #subbar([Pre-processing for item-based filtering])
+]
+#v(1em)
+
 - Memory requirements
   - Up to $N^2$ pair-wise similarities to be memorized (N = number of items) in theory
   - In practice, this is significantly lower (items with no co-ratings)
@@ -497,18 +514,9 @@ $ "sim"(a,b) = frac(sum_(u in U) (r_(u,a) - overline(r)_u) (r_(u,b) - overline(r
 ]
 #v(1em)
 
-- Probably the most precise ratings
-- Most commonly used (1 to 5, 1 to 7 Likert response scales)
-- Research topics
-  - Optimal granularity of scale; indication that 10-point scale is better accepted in movie dom.
-  - An even more fine-grained scale was chosen in the joke recommender discussed by Goldberg et al. (2001), where a continuous scale (from −10 to +10) and a graphical input bar were used
-    - No precision loss from the discretization
-    - User preferences can be captured at a finer granularity
-    - Users actually "like" the graphical interaction method
-  - Multidimensional ratings (multiple ratings per movie such as ratings for actors and sound)
-- Main problems
-  - Users not always willing to rate many items $->$ sparse rating matrices
-  - How to stimulate users to rate more items?
+- Probably the most precise type of rating.
+- Optimal scale is an area of research, more granular scales can capture preferences better and improve the user experience.
+- Main problem is data sparsity. Users are often reluctant to provide ratings, leading to sparse matrices and poor recommendations.
 
 
 
@@ -518,15 +526,10 @@ $ "sim"(a,b) = frac(sum_(u in U) (r_(u,a) - overline(r)_u) (r_(u,b) - overline(r
 ]
 #v(1em)
 
-- Typically collected by the web shop or application in which the recommender system is embedded
-- When a customer buys an item, for instance, many recommender systems interpret this behavior as a positive rating
-- Clicks, page views, time spent on some page, demo downloads …
-- Implicit ratings can be collected constantly and do not require additional efforts from the side of the user
-- Main problem
-  - One cannot be sure whether the user behavior is correctly interpreted
-  - For example, a user might not like all the books he or she has bought; the user also might have bought a book for someone else
-- Implicit ratings can be used in addition to explicit ones; question of correctness of interpretation
-
+- User actions automatically observed and logged by the system (e.g., purchases, clicks, time on page).
+- They are abundant and easy to collect, as they require no extra effort from the user.
+- The main problem: ambiguity. You can't be certain if an action truly reflects a user's preference (e.g., was a book bought for themselves or as a gift?).
+- Implicit ratings are more plentiful but noisier than explicit ratings.
 
 
 == Collaborative Filtering
@@ -541,6 +544,15 @@ $ "sim"(a,b) = frac(sum_(u in U) (r_(u,a) - overline(r)_u) (r_(u,b) - overline(r
   - Ask/force users to rate a set of items
   - Use another method (e.g., content-based, demographic or simply non-personalized) in the initial phase
   - Default voting: assign default values to items that only one of the two users to be compared has rated (Breese et al. 1998)
+
+
+
+== Collaborative Filtering
+#place(top + left, dx: -2.5em)[
+  #subbar([Data sparsity problems])
+]
+#v(1em)
+
 - Alternatives
   - Use better algorithms (beyond nearest-neighbor approaches)
   - Example:
@@ -555,24 +567,21 @@ $ "sim"(a,b) = frac(sum_(u in U) (r_(u,a) - overline(r)_u) (r_(u,b) - overline(r
 ]
 #v(1em)
 
-- "Spreading activation" (Huang et al. 2004)
-  - Exploit the supposed "transitivity" of customer tastes and thereby augment the matrix with additional information
-  - Assume that we are looking for a recommendation for User1
-  - When using a standard CF approach, User2 will be considered a peer for User1 because they both bought Item2 and Item4
-  - Thus Item3 will be recommended to User1 because the nearest neighbor, User2, also bought or liked it
+#grid(
+  columns: (1fr, 0.5fr),
+  gutter: 1em,
+  text[
+  - "Spreading activation" (Huang et al. 2004)
+    - Exploit the supposed "transitivity" of customer tastes and thereby augment the matrix with additional information
+    - Assume that we are looking for a recommendation for User1
+    - When using a standard CF approach, User2 will be considered a peer for User1 because they both bought Item2 and Item4
+    - Thus Item3 will be recommended to User1 because the nearest neighbor, User2, also bought or liked it],
+  align(center)[
+    #image("images/graph-cf-example.png", width:90%)
+  ]
+)
 
 
-
-== Collaborative Filtering
-#place(top + left, dx: -2.5em)[
-  #subbar([Graph-based methods (2)])
-]
-#v(1em)
-
-- "Spreading activation" (Huang et al. 2004)
-  - In a standard user-based or item-based CF approach, paths of length 3 will be considered – that is, Item3 is relevant for User1 because there exists a three-step path (User1–Item2–User2–Item3) between them
-  - Because the number of such paths of length 3 is small in sparse rating databases, the idea is to also consider longer paths (indirect associations) to compute recommendations
-  - Using path length 5, for instance
 
 
 
@@ -581,9 +590,20 @@ $ "sim"(a,b) = frac(sum_(u in U) (r_(u,a) - overline(r)_u) (r_(u,b) - overline(r
   #subbar([Graph-based methods (2)])
 ]
 #v(1em)
-#align(center)[
-  #image("images/graph-cf-example.png", width:25%)
-]
+
+
+#grid(
+  columns: (1fr, 0.5fr),
+  gutter: 1em,
+  text[
+  - "Spreading activation" (Huang et al. 2004)
+    - In a standard user-based or item-based CF approach, paths of length 3 will be considered – that is, Item3 is relevant for User1 because there exists a three-step path (User1–Item2–User2–Item3) between them
+    - Because the number of such paths of length 3 is small in sparse rating databases, the idea is to also consider longer paths (indirect associations) to compute recommendations
+    - Using path length 5, for instance],
+  align(center)[
+    #image("images/graph-cf-example.png", width:90%)
+  ]
+)
 
 
 
@@ -599,7 +619,7 @@ $ "sim"(a,b) = frac(sum_(u in U) (r_(u,a) - overline(r)_u) (r_(u,b) - overline(r
   - Length 5: Item1 also recommendable
 
 #align(center)[
-  #image("images/graph-cf-example-2.png", width: 30%)
+  #image("images/graph-cf-example-2.png", width: 25%)
 ]
 
 
@@ -703,6 +723,15 @@ SVD: $M_k = U_k times Sigma_k times V_k^T$
   - Projecting items and users in the same n-dimensional space
 - Prediction quality can decrease because…
   - the original ratings are not taken into account
+
+
+
+== Collaborative Filtering
+#place(top + left, dx: -2.5em)[
+  #subbar([Discussion about dimensionality reduction (Sarwar et al. 2000a)])
+]
+#v(1em)
+
 - Prediction quality can increase as a consequence of…
   - filtering out some "noise" in the data and
   - detecting nontrivial correlations in the data
@@ -742,10 +771,28 @@ SVD: $M_k = U_k times Sigma_k times V_k^T$
   gutter: 1em,
   [
     - Simplest approach
-      - transform 5-point ratings into binary ratings (1 = above user average)
+      - Transform 5-point ratings into binary ratings (1 = above user average)
     - Mine rules such as
       - Item1 $->$ Item5
-        - support (2/4), confidence (2/2) (without Alice)
+        - Support (2/4), confidence (2/2) (without Alice)
+  ],
+  align(center)[
+    #image("images/association-rule-cf-example.png", width: 100%)
+  ]
+)
+
+
+
+== Collaborative Filtering
+#place(top + left, dx: -2.5em)[
+  #subbar([Recommendation based on Association Rule Mining])
+]
+#v(1em)
+
+#grid(
+  columns: (7fr, 3fr),
+  gutter: 1em,
+  [
     - Make recommendations for Alice (basic method)
       - Determine "relevant" rules based on Alice's transactions (the above rule will be relevant as Alice bought Item1)
       - Determine items not already bought by Alice
@@ -767,19 +814,24 @@ SVD: $M_k = U_k times Sigma_k times V_k^T$
 #v(1em)
 
 - Basic idea (simplistic version for illustration):
-  - given the user/item rating matrix
-  - determine the probability that user Alice will like an item $i$
-  - base the recommendation on such these probabilities
+  - Given the user/item rating matrix
+  - Determine the probability that user Alice will like an item $i$
+  - Base the recommendation on such these probabilities
+
+
+
+== Collaborative Filtering
+#place(top + left, dx: -2.5em)[
+  #subbar([Probabilistic methods])
+]
+#v(1em)
+
 - Calculation of rating probabilities based on Bayes Theorem
   - How probable is rating value "1" for Item5 given Alice's previous ratings?
   - Corresponds to conditional probability $P("Item5"=1 | X)$, where
     - X = Alice's previous ratings = (Item1 =1, Item2=3, Item3= … )
   - Can be estimated based on Bayes' Theorem
-
     $ P(Y|X) = (P(X|Y) times P(Y))/(P(X)) $, $ P(Y|X) = (product_(i=1)^d P(X_i|Y) times P(Y))/(P(X)) $
-
-  - Assumption: Ratings are independent (?)
-
 
 
 == Collaborative Filtering
@@ -820,12 +872,21 @@ SVD: $M_k = U_k times Sigma_k times V_k^T$
     - $P(C = c, v_1, ..., v_n) = P(C = c) product_(i=1)^n P(v_i|C = c)$
   - Based on model-based clustering (mixture model)
     - Number of classes and model parameters have to be learned from data in advance (EM algorithm)
+
+
+
+
+== Collaborative Filtering
+#place(top + left, dx: -2.5em)[
+  #subbar([Practical probabilistic approaches])
+]
+#v(1em)
+
 - Others:
   - Bayesian Networks, Probabilistic Latent, ….
 - Empirical analysis shows:
   - Probabilistic methods lead to relatively good results (movie domain)
   - No consistent winner; small memory-footprint of network model
-
 
 
 == Collaborative Filtering
@@ -838,9 +899,18 @@ SVD: $M_k = U_k times Sigma_k times V_k^T$
 - Basic scheme: $hat(r)_(u, i) = "argmax"_(v in R) f_"user"(u, v) * f_"item"(i, v)$
   - $R$: Set of all rating values, e.g., $R = \{1,2,3,4,5\}$ on a 5-point rating scale
   - $f_"user"(u,v)$ and $f_"item"$ basically describe how often a rating $v$ was assigned by user $u$ and to item $i$ respectively.
+
+
+
+== Collaborative Filtering
+#place(top + left, dx: -2.5em)[
+  #subbar([RF-Rec predictors (Gedikli et al. 2011)])
+]
+#v(1em)
+
 - Example:
 
-  #image("images/rf-rec-cf-example.png", width: 40%)
+#align(center)[#image("images/rf-rec-cf-example.png", width: 50%)]
 
 - $p("Alice", "Item3") = 1$
 
