@@ -11,7 +11,7 @@
 
 
 // Cap
-#let cap = "cap4p3"
+#let cap = "cap4p4"
 
 #let chapter_titles = (
   cap0:   "Chapter 0 – Introduction",
@@ -28,6 +28,7 @@
   cap3p4: "Chapter 3 Part 4 - Graph Neural Networks",
   cap4p2: "Chapter 4 Part 2 - Web Logs and Session Reconstruction",
   cap4p3: "Chapter 4 Part 3 - Recommendation Systems",
+  cap4p4: "Chapter 4 Part 4 - Recommendation Systems II"
 )
 
 // Subtitulos
