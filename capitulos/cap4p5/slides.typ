@@ -101,9 +101,6 @@ $ "CSP"(V = V_c union V_"PROD", D, C = C_R union C_F union C_"PROD" union "REQ")
 
 
 
-
-
-
 == Knowledge Representation
 #place(top + left, dx: -2.5em)[
   #subbar([Case-based])
