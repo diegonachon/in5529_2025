@@ -206,7 +206,7 @@ $ "CSP"(V = V_c union V_"PROD", D, C = C_R union C_F union C_"PROD" union "REQ")
 
 
 
-== Knowledge-based Recommendation
+== Interacting with Constraint-Based Recommenders
 #place(top + left, dx: -2.5em)[
   #subbar([Unsatisfied requirements])
 ]
@@ -221,10 +221,7 @@ $ "CSP"(V = V_c union V_"PROD", D, C = C_R union C_F union C_"PROD" union "REQ")
 
 
 
-
-
-
-== Knowledge-based Recommendation
+== Interacting with Constraint-Based Recommenders
 #place(top + left, dx: -2.5em)[
   #subbar([Deal with unsatisfied requirements])
 ]
@@ -240,7 +237,7 @@ $ "CSP"(V = V_c union V_"PROD", D, C = C_R union C_F union C_"PROD" union "REQ")
 
 
 
-== Knowledge-based Recommendation
+== Interacting with Constraint-Based Recommenders
 #place(top + left, dx: -2.5em)[
   #subbar([Deal with unsatisfied requirements - QuickXPlain])
 ]
@@ -252,7 +249,7 @@ $ "CSP"(V = V_c union V_"PROD", D, C = C_R union C_F union C_"PROD" union "REQ")
 
 
 
-== Knowledge-based Recommendation
+== Interacting with Constraint-Based Recommenders
 #place(top + left, dx: -2.5em)[
   #subbar([Deal with unsatisfied requirements - QuickXPlain])
 ]
@@ -266,7 +263,7 @@ $ "REQ" = \{ r_1:"price" <= 150, r_2:"opt-zoom"=5x, r_3:"sound"="yes", r_4:"wate
 
 
 
-== Knowledge-based Recommendation
+== Interacting with Constraint-Based Recommenders
 #place(top + left, dx: -2.5em)[
   #subbar([Deal with unsatisfied requirements - QuickXPlain])
 ]
@@ -278,7 +275,7 @@ $ "REQ" = \{ r_1:"price" <= 150, r_2:"opt-zoom"=5x, r_3:"sound"="yes", r_4:"wate
 
 
 
-== Knowledge-based Recommendation
+== Interacting with Constraint-Based Recommenders
 #place(top + left, dx: -2.5em)[
   #subbar([Repairs for unsatisfied requirements])
 ]
@@ -296,7 +293,7 @@ $ "REQ" = \{ r_1:"price" <= 150, r_2:"opt-zoom"=5x, r_3:"sound"="yes", r_4:"wate
 
 
 
-== Knowledge-based Recommendation
+== Interacting with Constraint-Based Recommenders
 #place(top + left, dx: -2.5em)[
   #subbar([Ranking the items])
 ]
@@ -312,7 +309,7 @@ $ "REQ" = \{ r_1:"price" <= 150, r_2:"opt-zoom"=5x, r_3:"sound"="yes", r_4:"wate
 
 
 
-== Knowledge-based Recommendation
+== Interacting with Constraint-Based Recommenders
 #place(top + left, dx: -2.5em)[
   #subbar([Item utility for customers])
 ]
@@ -325,7 +322,7 @@ $ "REQ" = \{ r_1:"price" <= 150, r_2:"opt-zoom"=5x, r_3:"sound"="yes", r_4:"wate
 
 
 
-== Knowledge-based Recommendation
+== Interacting with Constraint-Based Recommenders
 #place(top + left, dx: -2.5em)[
   #subbar([Item utility for customers])
 ]
@@ -339,7 +336,7 @@ $ "REQ" = \{ r_1:"price" <= 150, r_2:"opt-zoom"=5x, r_3:"sound"="yes", r_4:"wate
 
 
 
-== Knowledge-based Recommendation
+== Interacting with Constraint-Based Recommenders
 #place(top + left, dx: -2.5em)[
   #subbar([Item utility for customers])
 ]
@@ -355,7 +352,7 @@ $ "REQ" = \{ r_1:"price" <= 150, r_2:"opt-zoom"=5x, r_3:"sound"="yes", r_4:"wate
 
 
 
-== Knowledge-based Recommendation
+== Interacting with Constraint-Based Recommenders
 #place(top + left, dx: -2.5em)[
   #subbar([Item utility for customers])
 ]
@@ -370,151 +367,84 @@ $ "REQ" = \{ r_1:"price" <= 150, r_2:"opt-zoom"=5x, r_3:"sound"="yes", r_4:"wate
 
 
 
-// ---
+== Interacting with Case-Based Recommenders
+#place(top + left, dx: -2.5em)[
+  #subbar([Case-based recommender systems])
+]
+#v(1em)
+
+- Items are retrieved using similarity measures
+- Distance similarity
+  $ "similarity"(p, "REQ") = frac(sum_(r in "REQ") w_r times "sim"(p,r), sum_(r in "REQ") w_r) $
+- Where
+  - $"sim"(p, r)$ expresses for each item attribute value $phi.alt(p)$ its distance to the customer requirement $r in "REQ"$.
+  - $w_r$ is the importance weight for requirement $r$
 
 
 
-// == Knowledge-based Recommendation
-// #place(top + left, dx: -2.5em)[
-//   #subbar([Case-based recommender systems])
-// ]
-// #v(1em)
+== Interacting with Case-Based Recommenders
+#place(top + left, dx: -2.5em)[
+  #subbar([Interacting with case-based recommenders])
+]
+#v(1em)
 
-// - Items are retrieved using similarity measures
-// - Distance similarity
-//   $ "similarity"(p, "REQ") = frac(sum_(r in "REQ") w_r times "sim"(p,r), sum_(r in "REQ") w_r) $
+- Customers maybe not know what they are seeking.
+- Critiquing is an effective way to support such navigations.
+- Customers specify their change requests (price or mpix) that are not satisfied by the current item (entry item).
 
-// - Def.
-//   - $"sim"(p, r)$ expresses for each item attribute value $phi(p)$ its distance to the customer requirement $r in "REQ"$.
-//   - $w_r$ is the importance weight for requirement $r$
-//   - In real world, customer would like to
-//     - maximize certain properties. i.e. resolution of a camera, "more is better" (MIB)
-//     - minimize certain properties. i.e. price of a camera, "less is better" (LIB)
+#figure(
+  image("images/interact.png", width: 80%)
+)
 
 
 
-// ---
+== Interacting with Case-Based Recommenders
+#place(top + left, dx: -2.5em)[
+  #subbar([Compound critiques])
+]
+#v(1em)
+
+- Operate over multiple properties can improve the efficiency of recommendation dialogs
+
+#figure(
+  image("images/compound.png", width: 50%)
+)
 
 
 
-// == Knowledge-based Recommendation
-// #place(top + left, dx: -2.5em)[
-//   #subbar([Interacting with case-based recommenders])
-// ]
-// #v(1em)
+== Interacting with Case-Based Recommenders
+#place(top + left, dx: -2.5em)[
+  #subbar([Dynamic critiques])
+]
+#v(1em)
 
-// - Customers maybe not know what they are seeking.
-// - Critiquing is an effective way to support such navigations.
-// - Customers specify their change requests (price or mpix) that are not satisfied by the current item (entry item).
-
-// #figure(
-//   image("Chapters/Cap4/images/interact.png", width: 80%)
-// )
+- Exploits patterns, which are generic descriptions of differences between the recommended (entry) and the candidate items.
+- Denoted as dynamic because they are derived on the fly in each critiquing cycle.
+- Are calculated using the concept of association rule mining.
+- Example:
+  - "42.9% of the remaining digital cameras have a higher zoom and a lower price" (more zoom and lower price).
 
 
 
-// ---
+== Interacting with Case-Based Recommenders
+#place(top + left, dx: -2.5em)[
+  #subbar([Example: Sales dialogue financial services])
+]
+#v(1em)
 
-
-
-// == Knowledge-based Recommendation
-// #place(top + left, dx: -2.5em)[
-//   #subbar([Compound critiques])
-// ]
-// #v(1em)
-
-// - Operate over multiple properties can improve the efficiency of recommendation dialogs
-
-// #figure(
-//   image("Chapters/Cap4/images/compound.png", width: 50%)
-// )
-
-
-
-// ---
-
-
-
-// == Knowledge-based Recommendation
-// #place(top + left, dx: -2.5em)[
-//   #subbar([Dynamic critiques])
-// ]
-// #v(1em)
-
-// - Exploits patterns, which are generic descriptions of differences between the recommended (entry) and the candidate items.
-// - Denoted as dynamic because they are derived on the fly in each critiquing cycle.
-// - Are calculated using the concept of association rule mining.
-// - Example:
-//   - "42.9% of the remaining digital cameras have a higher zoom and a lower price" (more zoom and lower price).
-
-
-
-// ---
-
-
-
-// == Knowledge-based Recommendation
-// #place(top + left, dx: -2.5em)[
-//   #subbar([Example: Sales dialogue financial services])
-// ]
-// #v(1em)
-
-// #grid(
-//   columns: (3fr, 7fr),
-//   gutter: 1em,
-//   image("Chapters/Cap4/images/ex1.png", width: 90%),
-//   [
-//     - In the financial services domain
-//       - Sales representatives do not know which services should be recommended
-//       - Improve the overall productivity of sales representatives
-//     - Resembles call-center scripting
-//       - Best-practice sales dialogues
-//       - States, transitions with predicates
-//     - Research results
-//       - Support for KA and validation
-//       - Node properties (reachable, extensible, deterministic)
-//   ]
-// )
-
-
-
-// ---
-
-
-
-// == Knowledge-based Recommendation
-// #place(top + left, dx: -2.5em)[
-//   #subbar([Example software: VITA sales support])
-// ]
-// #v(1em)
-
-// #figure(
-//   image("Chapters/Cap4/images/ex2.png", width: 60%)
-// )
-
-
-
-// ---
-
-
-
-// == Example: Critiquing
-// #v(1em)
-
-// #grid(
-//   columns: (1fr, 1fr),
-//   gutter: 1em,
-//   image("Chapters/Cap4/images/ex3.png", width: 85%),
-//   [
-//     - Similarity-based navigation in item space
-//     - Compound critiques
-//       - more efficient navigation than with unit critiques
-//       - mining of frequent patterns
-//     - Dynamic critiques
-//       - only applicable compound critiques proposed
-//     - Incremental critiques
-//       - considers history
-//     - Adaptive suggestions
-//       - suggest items that allow to best refine user's preference model
-//   ]
-// )
+#grid(
+  columns: (3fr, 7fr),
+  gutter: 1em,
+  image("images/ex1.png", width: 90%),
+  [
+    - In the financial services domain
+      - Sales representatives do not know which services should be recommended
+      - Improve the overall productivity of sales representatives
+    - Resembles call-center scripting
+      - Best-practice sales dialogues
+      - States, transitions with predicates
+    - Research results
+      - Support for KA and validation
+      - Node properties (reachable, extensible, deterministic)
+  ]
+)
