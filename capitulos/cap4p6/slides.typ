@@ -376,3 +376,67 @@ $ exists_1 k: 1 ... n quad "rec"_"switching" (u,i) = "rec"_k (u,i) $
   - *Cold-Start Problem:* The system could use a Knowledge-Based recommender for new users and then "switch" to Collaborative Filtering once enough rating data is available.
   - *Optimizing Results:* A system might try different algorithms in a specific order. For example, first tries a content-based kNN; if that fails, it switches to collaborative filtering, and finally falls back to a long-term interest model.
   - *Handling Insufficient Results:* A system could use a primary algorithm and then switch secondary strategy if the primary one doesn't produce enough recommendations.
+
+
+
+== Pipelined Hybridization Design
+#place(top + left, dx: -2.5em)[
+  #subbar([Pipelined Hybridization])
+]
+#v(1em)
+
+- Implement a staged process in which several techniques sequentially build on each other before the final one produces recommendations.
+- Variants differentiate themselves mainly according to the type of output they produce.
+  - Cascade hybrids
+  - Meta-level hybrids
+
+
+
+== Pipelined Hybridization Design
+#place(top + left, dx: -2.5em)[
+  #subbar([Cascade Hybrids])
+]
+#v(1em)
+
+- A hybrid design where recommenders are arranged in a sequence or "pipeline."
+- Each recommender in the sequence *refines* the list of recommendations from the one before it.
+- The output of one stage serves as the input for the next.
+- Formally, we define it as:
+$ "rec"_"cascade" (u,i) = "rec"_n (u,i) $
+where $forall k >= 2$:
+$ "rec"_k (u,i) = cases(
+      "rec"_k (u,i) quad &: "rec"_(k-1) (u,i) != 0, 
+      0 &: "else") $
+
+
+---
+
+
+
+== Cascade Hybrids
+#place(top + left, dx: -2.5em)[
+  #subbar([The Key Rule])
+]
+#v(1em)
+
+- The core principle is that a recommender in the sequence can only **re-rank or remove** items from its predecessor's list.
+- **It cannot introduce new items.** If an item was filtered out in an early stage, it cannot be brought back in a later stage.
+- This creates a multi-stage filtering and refining process.
+
+
+
+---
+
+
+
+== Cascade Hybrids
+#place(top + left, dx: -2.5em)[
+  #subbar([Advantages and Disadvantages])
+]
+#v(1em)
+
+- **Main Use Case:** They are a natural choice when one recommender produces a large, unsorted list of candidates.
+  - *Example:* A Knowledge-Based system finds all products that meet a user's requirements, and a second, cascaded algorithm (like Collaborative Filtering) then ranks those products for personalization.
+
+- **Potential Disadvantage:** The final recommendation list can sometimes be very small (or even empty) if each stage filters out too many items.
+  - A common solution is to combine it with a *switching hybrid* as a fallback strategy.
