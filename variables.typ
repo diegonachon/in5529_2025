@@ -30,7 +30,7 @@
   cap4p3: "Chapter 4 Part 3 - Recommendation Systems",
   cap4p4: "Chapter 4 Part 4 - Recommendation Systems II",
   cap4p5: "Chapter 4 Part 5 - Recommendation Systems III",
-  cap4p6: "Chapter 4 Part 5 - Recommendation Systems IV"
+  cap4p6: "Chapter 4 Part 6 - Recommendation Systems IV"
 )
 
 // Subtitulos
