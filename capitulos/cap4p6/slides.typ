@@ -409,34 +409,95 @@ $ "rec"_k (u,i) = cases(
       0 &: "else") $
 
 
----
 
-
-
-== Cascade Hybrids
+== Pipelined Hybridization Design
 #place(top + left, dx: -2.5em)[
-  #subbar([The Key Rule])
+  #subbar([Cascade Hybrids: The Key Rule])
 ]
 #v(1em)
 
-- The core principle is that a recommender in the sequence can only **re-rank or remove** items from its predecessor's list.
-- **It cannot introduce new items.** If an item was filtered out in an early stage, it cannot be brought back in a later stage.
+- The core principle is that a recommender in the sequence can only *re-rank or remove* items from its predecessor's list.
+- *It cannot introduce new items.* If an item was filtered out in an early stage, it cannot be brought back in a later stage.
 - This creates a multi-stage filtering and refining process.
 
 
 
----
-
-
-
-== Cascade Hybrids
+== Pipelined Hybridization Design
 #place(top + left, dx: -2.5em)[
-  #subbar([Advantages and Disadvantages])
+  #subbar([Cascade Hybrids: Advantages and Disadvantages])
 ]
 #v(1em)
 
-- **Main Use Case:** They are a natural choice when one recommender produces a large, unsorted list of candidates.
-  - *Example:* A Knowledge-Based system finds all products that meet a user's requirements, and a second, cascaded algorithm (like Collaborative Filtering) then ranks those products for personalization.
+- They are a natural choice when one recommender produces a large, unsorted list of candidates.
+  - Example: A Knowledge-Based system finds all products that meet a user's requirements, and a second, cascaded algorithm (like Collaborative Filtering) then ranks those products for personalization.
 
-- **Potential Disadvantage:** The final recommendation list can sometimes be very small (or even empty) if each stage filters out too many items.
+- The final recommendation list can sometimes be very small (or even empty) if each stage filters out too many items.
   - A common solution is to combine it with a *switching hybrid* as a fallback strategy.
+
+
+
+== Pipelined Hybridization Design
+#place(top + left, dx: -2.5em)[
+  #subbar([Meta-level Hybrids])
+]
+#v(1em)
+
+- A pipelined design where one recommendation technique is used to build a model that serves as the input for the main, principal recommender.
+- The first recommender doesn't output a list of items, but rather a learned *model* or set of features. The second recommender then uses this model to produce the final recommendations.
+
+
+
+== Pipelined Hybridization Design
+#place(top + left, dx: -2.5em)[
+  #subbar([Example: Collaboration via Content])
+]
+#v(1em)
+
+- The *Fab* system is a classic example of this design.
+- _Stage 1 (Content-Based Model):_
+  - A content-based system first builds a user profile based on the content of items the user has liked (e.g., a vector of preferred keyword categories).
+- _Stage 2 (Collaborative Recommendation):_
+  - The main collaborative recommender then uses these *content-based profiles* to find users with similar tastes.
+  - It recommends items that these similar peers have liked.
+- This approach performs better than base techniques, especially when users have only a few rated items in common.
+
+
+
+== Pipelined Hybridization Design
+#place(top + left, dx: -2.5em)[
+  #subbar([Example: Collaborative Knowledge])
+]
+#v(1em)
+
+- This variant combines Collaborative Filtering with a Knowledge-Based recommender.
+- _Stage 1 (Collaborative Model):_
+  - A collaborative filtering step retrieves *constraints* or rules from a user's peers.
+  - Example rule: `"for_whom" = "gift" -> "brand" = "Montecristo"`.
+- _Stage 2 (Knowledge-Based Recommendation):_
+  - The main knowledge-based recommender applies this collection of peer-generated constraints to the product database to derive the final item recommendations.
+
+
+
+== Discussion and Summary
+#place(top + left, dx: -2.5em)[
+  #subbar([Key Takeaways])
+]
+#v(1em)
+
+- *No "One-Size-Fits-All" Solution:* No single hybridization variant is universally best; the right choice depends on the specific application and problem.
+
+- *Hybrids Are Better:* It is well-accepted that all base algorithms can be improved by being hybridized with other techniques.
+
+
+
+== Discussion and Summary
+#place(top + left, dx: -2.5em)[
+  #subbar([The Research Gap])
+]
+#v(1em)
+
+- A major reason there's little research comparing different hybrid strategies is the *lack of appropriate datasets*.
+
+- Most well-researched domains are collaborative movie recommendations or content-based news, making it hard to generalize findings for other areas.
+
+- Therefore, no empirically backed conclusions about the definitive advantages of different hybridization variants can be drawn.
