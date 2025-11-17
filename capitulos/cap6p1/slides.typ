@@ -14,7 +14,7 @@
 ]
 #v(1em)
 
-- Generative AI technologies have an inflection point in consumer adoption and enterprise value.
+- Generative AI technologies have produced an inflection point in consumer adoption and enterprise value.
 
 - Models such as GPT and BERT have demonstrated that powerful generative models can produce works at a human-like level or fidelity.
 
@@ -34,12 +34,12 @@
 ]
 #v(1em)
 
-- This commercialization of generative AI technologies is fueled by the utltra-rapid development of large-scale foundation models that reduce the time and costs for developing generative.
+- This commercialization of generative AI technologies is fueled by the ultra-rapid development of large-scale foundation models that reduce the time and costs for developing generative.
 
 - ML research communities has focused on developing advancements to the technology:
   - Scaling model parameter counts
   - Evaluating model performance
-  - Aligining models to reduce theur propensity to produce hateful and/or toxic speech
+  - Aligning models to reduce their propensity to produce hateful and/or toxic speech
 
 - But what about the human side of this "human-AI assemblage"?
 
@@ -59,7 +59,7 @@
   
   - *Intent-Based Outcome Specification*
 
-- People are now able to craft scpecifications for the kinds of outputs they desire, such as via natural language promts, and generative models are able to produce outputs that conform to those specifications.
+- People are now able to craft specifications for the kinds of outputs they desire, such as via natural language prompts, and generative models are able to produce outputs that conform to those specifications.
 
 - _Users specify *what* they want, but not *how* to produce it, and generative models do it._
 
@@ -77,7 +77,7 @@
 ]
 #v(1em)
 
-- This form of interaction is fundamentally different from previous interaction paradigms, such as punchcards, command line interfaces or graphical user interfaces.
+- This form of interaction is fundamentally different from previous interaction paradigms, such as punch cards, command line interfaces or graphical user interfaces.
 
 - It shifts control *away* from the user and *toward* the AI model.
 
@@ -101,7 +101,7 @@
 
   - New skills development: To handle Generative Variability, users needs to learn how to create specifications that result in outputs that match their desired intent ("prompt engineering").
 
-  - New Risks: Copyright issues, production of hateful/toxic language, lack of representation of minority groups due to underrepresentation in the training data, hallucinations.
+  - New Risks: Copyright issues, production of hateful/toxic language, lack of representation of minority groups due to under representation in the training data, hallucinations.
 
 
 
@@ -181,9 +181,9 @@
 
   + *Feedback*: Collect feedback from conference workshop and designers.
 
-  + *Modified Heuristic* Evaluation: Test principles for clarity, relevance, and coverage by having designers evaluate commercial generative AI applications.
+  + *Modified Heuristic Evaluation*: Test principles for clarity, relevance, and coverage by having designers evaluate commercial generative AI applications.
 
-  + *Application*: Demonstrate real world applicability and utility by havign two prodict teams adopt the principles in their own design work.
+  + *Application*: Demonstrate real world applicability and utility by having two product teams adopt the principles in their own design work.
 
 
 
@@ -216,11 +216,11 @@
 ]
 #v(1em)
 
-1. _Use a human-centered approach_: Focus on the user's real needs and pain points, not just the technology's capabilities.
+1. _Use a human-centered approach:_ Focus on the user's real needs and pain points, not just the technology's capabilities.
 
   - Example: Use participatory design to co-design prototypes with users, ensuring the AI is solving a real problem.
 
-2. _Identify and resolve value tensions_: Balance the different values of all stakeholders (end-users, designers, business decision-makers, developers)
+2. _Identify and resolve value tensions:_ Balance the different values of all stakeholders (end-users, designers, business decision-makers, developers)
 
   - Example: Methods like Value Sensitive Design (VSD) map stakeholders and their competing values.
 
@@ -236,12 +236,12 @@
 ]
 #v(1em)
 
-3. _Expose or limit emergent behaviors_: Decide if unexpected capabilities are a *delightful feature* or a *harmful risk*.
+3. _Expose or limit emergent behaviors:_ Decide if unexpected capabilities are a *delightful feature* or a *harmful risk*.
 
   - Example: ChatGPT allows open-ended chat, letting users discover emergent tasks (like sentiment analysis) (expose), or AIVA (music generation) uses a GUI to restrict the model to only its intended musical tasks (limit).
 
  
-4. _Test & monitor for user harms_: Actively check for bias, toxicity, and misinformation. Assume harms *will* occur and plan a reporting mechanism.
+4. _Test & monitor for user harms:_ Actively check for bias, toxicity, and misinformation. Assume harms *will* occur and plan a reporting mechanism.
 
   - Benchmark models against known hate-speech or bias datasets.
 
@@ -281,11 +281,11 @@
 ]
 #v(1em)
 
-1. _Orient the user to generative variability_: Help users understand that outputs may be varied and *not reproducible*, even with the same input.
+1. _Orient the user to generative variability:_ Help users understand that outputs may be varied and *not reproducible*, even with the same input.
 
   - Example: ChatGPT provides answers in multiple "drafts", showing that it found several varied answers to the same question.
 
-2. _Teach effective use_: Use tutorials, examples, and documentation to help users form an effective mental model.
+2. _Teach effective use:_ Use tutorials, examples, and documentation to help users form an effective mental model.
 
   - Example: DALL-E provides a "Surprise Me" button and curated examples of prompts to teach users how to write them.
 
@@ -508,7 +508,7 @@
 
 - Users must understand that generative model outputs can be *imperfect*.
 
-- Imperfections can be *objective*, like _untruthful or misleading answers_ (hallucinations)or _outputs that violate the prompt's specifications_.
+- Imperfections can be *objective*, like _untruthful or misleading answers_ (hallucinations) or _outputs that violate the prompt's specifications_.
 
 - Imperfections can also be *subjective*, like the user simply doesn't like the output.
 
@@ -534,7 +534,7 @@
 
 2. _Evaluate outputs using domain-specific metrics:_ When quality is measurable, help the user identify outputs that meet those criteria.
 
-  - Example: A prototype for drug design (CogMol) evaluates generated molecules with a simulator to compute toxicity and water solubility.
+  - Example: Answers to customer queries can be evaluated for faithfulness to source documents.
 
 
 
@@ -568,7 +568,7 @@
 ]
 #v(1em)
 
-- In the design process, the authors found that *Optimization* and *Exploration* were not principles themselves, but rather _User Goals_.
+- In the design process, its found that *Optimization* and *Exploration* are not principles themselves, but rather _User Goals_.
 
 - Many applications support both goals, and users may switch between them in a single session.
 - The 6 Principles are a "toolbox" that designers can use to support either goal.
@@ -630,7 +630,7 @@
 
 - The HCI community struggles to get design guidelines used in real-world practice.
 
-- To bridge this gap, the authors promoted adoption within their organization using four key strategies.
+- To bridge this gap, the authors promoted adoption within an organization using four key strategies.
 
 
 
@@ -684,9 +684,9 @@
 
 - *Be proactive in teaching.*
 
-- The authors ran workshops for general design audiences.
+- Ran workshops for general design audiences.
 
-- They also targeted key product teams, using the heuristic evaluation template to analyze those teams' actual products.
+- Target key product teams, using the heuristic evaluation template to analyze those team's actual products.
 
 - This provided immediate, actionable feedback and value to the product teams.
 
@@ -704,9 +704,9 @@
 
 - *Get buy-in from the top.*
 
-- The authors worked with design executives to encourage product teams to adopt the principles.
+- Work with design executives to encourage product teams to adopt the principles.
 
-- This advocacy from leadership (as recommended by Madaio et al.) gives designers "a seat at the table" in the creation of AI applications.
+- This advocacy from leadership gives designers "a seat at the table" in the creation of AI applications.
 
 
 
