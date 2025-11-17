@@ -495,49 +495,26 @@
   - Example: Adobe Photoshop's Generative Fill feature exists within the main design canvas, allowing the user and AI to edit the same image.
 
 
----
-
-
 
 ---
 
 
 
-== Principle 6: Design for Imperfection
-#place(top + left, dx: -2.5em)[
-  #subbar([New Characteristics])
-]
-#v(1em)
-
-#align(center)[
-  #text(2em)[
-    "Help the user understand and work with outputs that may not align with their expectations."
-  ]
-]
-- Outputs can be "imperfect" in two ways:
-  - **Objectively:** The output is factually wrong (a "hallucination") or has bugs.
-  - **Subjectively:** The user simply doesn't like the output.
-
-
-
----
-
-
-
-== Principle 6: Strategies
+== Design Principles
 #place(top + left, dx: -2.5em)[
   #subbar([Design for Imperfection])
 ]
 #v(1em)
 
-- **Make uncertainty visible:**
-  - Caution the user that outputs may be flawed. Show the model's confidence level where possible.
-- **Evaluate outputs using domain-specific metrics:**
-  - When quality is measurable, help the user identify outputs that meet those criteria (e.g., "adheres to style guide").
-- **Offer ways to improve outputs:**
-  - Provide tools for users to fix flaws, such as editing tools, a "regenerate" button, or alternative suggestions.
-- **Provide feedback mechanisms:**
-  - Collect explicit user feedback (e.g., thumbs up/down) to help improve the AI model over time.
+- Users must understand that generative model outputs can be *imperfect*.
+
+- Imperfections can be *objective*, like _untruthful or misleading answers_ (hallucinations)or _outputs that violate the prompt's specifications_.
+
+- Imperfections can also be *subjective*, like the user simply doesn't like the output.
+
+- Designers must provide *transparency* by identifying or highlighting these possible imperfections.
+
+- The goal is to help the user *understand and work with* outputs that may not align with their expectations.
 
 
 
@@ -545,21 +522,39 @@
 
 
 
-== Principle 6: Examples
+== Design Principles
 #place(top + left, dx: -2.5em)[
   #subbar([Design for Imperfection])
 ]
 #v(1em)
 
-- **Make Uncertainty Visible:**
-  - Google Bard's interface states: "Bard may display inaccurate info... so double-check its responses."
-- **Domain-Specific Metrics:**
-  - A prototype for drug design (CogMol) evaluates generated molecules with a simulator to compute toxicity and water solubility.
-- **Offer Ways to Improve:**
-  - DALL-E offers "inpainting" (regenerating part of an image) and "outpainting" (extending an image).
-  - Google Bard offers one-click buttons to make a response "shorter," "longer," "simpler," or "more professional."
-- **Provide Feedback:**
-  - ChatGPT includes a "thumbs up / thumbs down" button on every response, along with a field for open-ended feedback.
+1. _Make uncertainty visible:_ Caution the user that outputs may be flawed. Show the model's confidence level where possible.
+
+  - Example: ChatGPT's terms of use state: _"Output may not always be accurate. You should not rely on Output from our Services as a sole source of truth or factual information, or as a substitute for professional advice"._
+
+2. _Evaluate outputs using domain-specific metrics:_ When quality is measurable, help the user identify outputs that meet those criteria.
+
+  - Example: A prototype for drug design (CogMol) evaluates generated molecules with a simulator to compute toxicity and water solubility.
+
+
+
+---
+
+
+
+== Design Principles
+#place(top + left, dx: -2.5em)[
+  #subbar([Design for Imperfection])
+]
+#v(1em)
+
+3. _Offer ways to improve outputs:_ Provide tools for users to fix flaws, such as editing tools, a "regenerate" button, or alternative suggestions.
+
+  - Example: DALL-E offers "inpainting" (regenerating part of an image) and "outpainting" (extending an image).
+
+4. _Provide feedback mechanisms:_ Collect explicit user feedback to help improve the AI model over time.
+
+  - Example: ChatGPT includes a "thumbs up / thumbs down" button on every response, along with a field for open-ended feedback.
 
 
 
@@ -573,7 +568,8 @@
 ]
 #v(1em)
 
-- In the design process, the authors found that *Optimization* and *Exploration* were not principles themselves, but rather **User Goals**.
+- In the design process, the authors found that *Optimization* and *Exploration* were not principles themselves, but rather _User Goals_.
+
 - Many applications support both goals, and users may switch between them in a single session.
 - The 6 Principles are a "toolbox" that designers can use to support either goal.
 
@@ -589,11 +585,14 @@
 ]
 #v(1em)
 
-- **Optimization** is when the user wants to produce a single, satisfactory artifact.
+- *Optimization* is when the user wants to produce a single, satisfactory artifact.
+
 - This goal is strongly supported by:
-  - **Design for Imperfection:** The user needs to fix flaws to reach their goal.
-  - **Design for Appropriate Trust & Reliance:** The user must be able to trust the output, especially in high-stakes domains (code, medical info).
-  - **Design for Co-Creation:** The user needs tools to *refine* and *edit* the output until it is perfect.
+
+  - _Design for Imperfection:_ The user needs to fix flaws to reach their goal.
+
+  - _Design for Appropriate Trust & Reliance:_ The user must be able to trust the output, especially in high-stakes domains (code, medical info).
+  - _Design for Co-Creation:_ The user needs tools to *refine* and *edit* the output until it is perfect.
 
 
 
@@ -607,10 +606,14 @@
 ]
 #v(1em)
 
-- **Exploration** is when the user uses generation as a *means to an end*—to learn, brainstorm, or be inspired.
+- *Exploration* is when the user uses generation as a *means to an end*—to learn, brainstorm, or be inspired.
+
 - This goal is strongly supported by:
-  - **Design for Generative Variability:** This is the *key enabler* of exploration. Seeing many different possibilities is the entire point.
-  - **Design for Mental Models:** The user needs to understand *how* to explore the "space of possibilities."
+  
+  - _Design for Generative Variability:_ This is the *key enabler* of exploration. Seeing many different possibilities is the entire point.
+
+  - _Design for Mental Models:_ The user needs to understand *how* to explore the "space of possibilities."
+
 - Trust and Imperfection are often less of a concern in pure exploration.
 
 
@@ -626,6 +629,7 @@
 #v(1em)
 
 - The HCI community struggles to get design guidelines used in real-world practice.
+
 - To bridge this gap, the authors promoted adoption within their organization using four key strategies.
 
 
@@ -634,14 +638,16 @@
 
 
 
-== Adoption Strategy 1
+== Adoption Strategies
 #place(top + left, dx: -2.5em)[
   #subbar([Actionable Activities])
 ]
 #v(1em)
 
-- **Create tools, not just rules.**
-- The authors created a "heuristic evaluation" template based on the principles.
+- *Create tools, not just rules.*
+
+- A "heuristic evaluation" template based on the principles.
+
 - This gives designers a concrete activity to apply the principles to their own work and find new design ideas.
 
 
@@ -650,15 +656,18 @@
 
 
 
-== Adoption Strategy 2
+== Adoption Strategies
 #place(top + left, dx: -2.5em)[
   #subbar([Progressive Detail])
 ]
 #v(1em)
 
-- **Provide different levels of detail.**
+- *Provide different levels of detail.*
+
 - A comprehensive guide (too long for most designers).
+
 - Paragraph-length descriptions (for templates and workshops).
+
 - One-sentence descriptions (for quick reference on an internal website).
 
 
@@ -667,15 +676,18 @@
 
 
 
-== Adoption Strategy 3
+== Adoption Strategies
 #place(top + left, dx: -2.5em)[
   #subbar([Hands-on Outreach])
 ]
 #v(1em)
 
-- **Be proactive in teaching.**
+- *Be proactive in teaching.*
+
 - The authors ran workshops for general design audiences.
+
 - They also targeted key product teams, using the heuristic evaluation template to analyze those teams' actual products.
+
 - This provided immediate, actionable feedback and value to the product teams.
 
 
@@ -684,14 +696,16 @@
 
 
 
-== Adoption Strategy 4
+== Adoption Strategies
 #place(top + left, dx: -2.5em)[
   #subbar([Executive Sponsorship])
 ]
 #v(1em)
 
-- **Get buy-in from the top.**
+- *Get buy-in from the top.*
+
 - The authors worked with design executives to encourage product teams to adopt the principles.
+
 - This advocacy from leadership (as recommended by Madaio et al.) gives designers "a seat at the table" in the creation of AI applications.
 
 
@@ -706,24 +720,13 @@
 ]
 #v(1em)
 
-- We developed 6 principles for designing Generative AI applications.
-- **3 New Interpretations:**
+- There are 6 principles for designing Generative AI applications:
+
   - Design Responsibly
   - Design for Mental Models
   - Design for Appropriate Trust & Reliance
-- **3 New Characteristics:**
   - Design for Generative Variability
   - Design for Co-Creation
   - Design for Imperfection
+
 - These principles and their strategies provide a toolbox to help practitioners build safer and more effective generative AI experiences.
-
-
-
----
-
-
-
-== Thank You
-#align(center)[
-  #text(2em)[Questions?]
-]
